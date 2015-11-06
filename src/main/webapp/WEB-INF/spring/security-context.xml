@@ -18,7 +18,7 @@
 
 		<security:form-login login-page="/login"
 			login-processing-url="/postLogin" username-parameter="username"
-			password-parameter="password" default-target-url="/employee"
+			password-parameter="password" default-target-url="/"
 			always-use-default-target="false" authentication-failure-url="/loginfailed" />
 		<security:logout logout-success-url="/" logout-url="/logout" />
 		
