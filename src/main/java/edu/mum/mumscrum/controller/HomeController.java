@@ -1,4 +1,4 @@
-package edu.mum.scrum;
+package edu.mum.mumscrum.controller;
 
 import java.text.DateFormat;
 import java.util.Date;

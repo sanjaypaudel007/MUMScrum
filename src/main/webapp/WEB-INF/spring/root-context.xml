@@ -11,9 +11,9 @@
       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
       http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-	<context:component-scan base-package="mum.edu.mumscrum.entities" />
-	<context:component-scan base-package="mum.edu.mumscrum.service"/>
-	<jpa:repositories base-package="mum.edu.mumscrum.repository" />
+	<context:component-scan base-package="edu.mum.mumscrum.entity" />
+	<context:component-scan base-package="edu.mum.mumscrum.service"/>
+	<jpa:repositories base-package="edu.mum.mumscrum.repository" />
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -26,7 +26,7 @@
 	<bean id="entityManager"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="mum.edu.mumscrum.entities" />
+		<property name="packagesToScan" value="edu.mum.mumscrum.entity" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
 		</property>

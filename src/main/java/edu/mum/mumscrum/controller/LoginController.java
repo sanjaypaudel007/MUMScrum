@@ -1,4 +1,4 @@
-package edu.mum.scrum.controller;
+package edu.mum.mumscrum.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
