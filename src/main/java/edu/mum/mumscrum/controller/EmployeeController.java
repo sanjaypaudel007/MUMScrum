@@ -50,16 +50,16 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String register(@ModelAttribute("userform") Employee employee, Model model) {
+	public String register(@ModelAttribute("employee") Employee employee, Model model) {
 		List<Role> roleList = roleService.getAllList();
 		model.addAttribute("roleList", roleList);
 		return "employee/register";
 	}
 
 	@RequestMapping(value = { "/register" }, method = RequestMethod.POST)
-	public String processRegistration(@Valid @ModelAttribute("userform") Employee employee, BindingResult result,
+	public String processRegistration(@Valid @ModelAttribute("employee") Employee employee, BindingResult result,
 			Model model, HttpServletRequest request) throws IllegalStateException, IOException  {
-
+		
 		employeeFormValidator.setAction("Add");
 		employeeFormValidator.validate(employee, result);
 		
