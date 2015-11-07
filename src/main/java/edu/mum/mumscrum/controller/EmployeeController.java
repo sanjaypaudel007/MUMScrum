@@ -32,7 +32,7 @@ import edu.mum.mumscrum.validator.EmployeeFormValidator;
 
 
 @Controller
-//@RequestMapping(value = "/employee")
+@RequestMapping(value = "/employee")
 public class EmployeeController {
 
 	@Autowired
@@ -42,7 +42,7 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeFormValidator employeeFormValidator;
 
-	@RequestMapping(value = "/employee", method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "" }, method = RequestMethod.GET)
 	public String index(Model model) {
 		List<Employee> employeeList = employeeService.getAllEmployee();
 		model.addAttribute("employeeList", employeeList);
