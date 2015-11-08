@@ -6,7 +6,7 @@
 <title>MUM Scrum</title>
 </head>
 <body>
-	<h1>Welcome user!</h1>
+	<h1>Welcome ${username}!</h1>
 
 	<P>
 		<a href="<spring:url value="/employee" />" >Employees</a>

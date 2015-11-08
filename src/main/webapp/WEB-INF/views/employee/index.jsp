@@ -11,7 +11,7 @@
 			<div>
 				List
 				<div>
-					<a href="<spring:url value="/employee/register" /> type="submit">Add</a>
+					<a href="<spring:url value="/employee/register" />" type="submit">Add</a>
 				</div>
 			</div>
 			<div>
