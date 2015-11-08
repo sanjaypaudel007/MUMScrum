@@ -46,24 +46,7 @@ public class EmployeeFormValidator implements Validator {
 			errors.rejectValue("username","error.username", "Try Again!! User Already exist!!!");
 		}
 		switch (action) {
-		case "Edit":
-			
-			if (employee.getEnablePasswordChange() == true) {
-				System.out.println("Errorss ::"+employee.getPassword().equals(employee.getRePassword()));
-				ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "error.employee.password");
-				ValidationUtils.rejectIfEmptyOrWhitespace(errors, "rePassword", "error.employee.repassword");
-				if (!employee.getPassword().equals(employee.getRePassword()) ) {
-					//employee.setPassword(employeeService.encryptPass(employee.getPassword()));
-					errors.rejectValue("password","error.password", "Try Again!! Password and retype password not matched!");
-				}
-			}else
-			{
-				Employee oldemployee = employeeService.getEmployee(employee.getId());
-				employee.setPassword(oldemployee.getPassword());
-				
-			}
 		
-			break;
 		case "Add":
 		default:
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "error.employee.password");

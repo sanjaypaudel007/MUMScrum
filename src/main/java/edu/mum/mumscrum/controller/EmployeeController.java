@@ -16,13 +16,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.mum.mumscrum.entity.Employee;
 import edu.mum.mumscrum.entity.Role;
-import edu.mum.mumscrum.response.Response;
 import edu.mum.mumscrum.response.ResponseStatusException;
 import edu.mum.mumscrum.service.EmployeeService;
 import edu.mum.mumscrum.service.RoleService;
@@ -104,82 +101,5 @@ public class EmployeeController {
 		return "employee/detail";
 	}
 
-	@RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.GET)
-	public String edit(@PathVariable("id") int employeeId, ModelMap model) {
-
-		Employee employee = employeeService.getEmployee(employeeId);
-		employee.setPassword("");
-		
-		List<Role> roleList = roleService.getAllList();
-		model.addAttribute("roleList", roleList);
-		model.addAttribute("employee", employee);
-		return "employee/edit";
-	}
-
-	@RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.POST)
-	public String update(@PathVariable("id") int employeeId, @Valid @ModelAttribute Employee employee, 
-			BindingResult result,
-			ModelMap model, HttpServletRequest request) throws IllegalStateException, IOException  {
-
-		List<Role> roleList = roleService.getAllList();
-		model.addAttribute("roleList", roleList);
-		
-		employee.setId(employeeId);
-		employeeFormValidator.setAction("Edit");
-		employeeFormValidator.validate(employee, result);
-		
-		if (employee.getEnablePasswordChange() == true) {
-			if (employee.getPassword().equals(employee.getRePassword())) {
-				employee.setPassword(employeeService.encryptPass(employee.getPassword()));
-			} else {
-				result.rejectValue("password", "Try Again!! Password and retype password not matched!");
-			}
-		}else
-		{
-			Employee oldemployee = employeeService.getEmployee(employeeId);
-			employee.setPassword(oldemployee.getPassword());
-			
-		}
-		if (result.hasErrors()) {
-			return "employee/edit";
-		}
-		// User Image
-		MultipartFile employeeImage = employee.getImage();
-		if (employeeImage != null && !employeeImage.isEmpty()) {
-			String rootDictory = request.getSession().getServletContext().getRealPath("/");
-			String imageSaveName = String.valueOf(employee.getUsername()) + employeeImage.getOriginalFilename();
-			employee.setImageUrl( imageSaveName );
-			employeeImage.transferTo(new File(rootDictory+ "resources\\employeeImages\\"+imageSaveName));
-		}else
-		{
-			Employee employeeOld = employeeService.getEmployee(employeeId);
-			employee.setImageUrl(employeeOld.getImageUrl());
-			
-		}
-		employeeService.add(employee);
-		return "redirect:/employee";
-		
-
-	}
 	
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-	public @ResponseBody Response delete(@PathVariable int id) throws RuntimeException
-	{
-		employeeService.delete(id);
-		Response response = new Response();
-		response.setMessage("Record successfully deleted.");
-		response.setSuccess(true);
-		return response;
-	}
-	
-	@RequestMapping(value = { "/search/","/search" }, method = RequestMethod.GET)
-	public List<Employee> search(@RequestParam("searchname") String searchname, HttpServletRequest request, Model model) {
-//		return ("hhhhhhhhhhhhhhhhh"+request.getParameter("searchname")+"::::"+searchname);
-		//List<Employee> employeeList = employeeService.getEmployeeByName(searchname);
-		List<Employee> employeeList = employeeService.getAllEmployee();
-		
-		model.addAttribute("employeeList", employeeList);
-		return employeeList;
-	}
-
 }
