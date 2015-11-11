@@ -1,23 +1,20 @@
-<%-- <%@ page import="edu.mum.mumscrum.entity.ProductBacklog" %> --%>
-
- 
- <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>  
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>  
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="row">
-	<div class="col-lg-12">
-		<h4 class="page-header">Employee Detail</h4>
+<div>
+	<div>
+		<h4>Employee Detail</h4>
 	</div>
 	<!-- /.col-lg-12 -->
 </div>
-<div class="row">
-	<div class="col-lg-6">
-		<div class="panel panel-default">
-			<div class="panel-heading"><i class="fa fa-list fa-fw"></i>Detail</div>
-			<div class="panel-body">
-				<dl class="dl-horizontal">
+<div>
+	<div>
+		<div>
+			<div>Detail</div>
+			<div>
+				<dl>
 				  <dt>Name: </dt><dd><c:out value="${employee.fullName}"></c:out></dd>
 				  <dt>Address: </dt><dd><c:out value="${employee.address}"></c:out></dd>
 				  <dt>Phone: </dt><dd><c:out value="${employee.phone}"></c:out></dd>
