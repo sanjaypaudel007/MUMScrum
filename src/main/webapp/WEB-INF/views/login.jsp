@@ -11,11 +11,11 @@
 	
 	<fieldset>
 		<div>
-			<input placeholder="Username" name="username"
+			<input placeholder="Username" name="username" class="form-control"
 				type="text" autofocus>
 		</div>
 		<div>
-			<input placeholder="Password" name="password"
+			<input placeholder="Password" name="password" class="form-control"
 				type="password" value="">
 		</div>
 		<!-- div class="checkbox">
@@ -24,7 +24,8 @@
 			</label>
 		</div> -->
 		<!-- Change this to a button or input when using this as a form -->
-		<input type="submit" name="btnLoginSubmit" value="Login"/>
+		<input type="submit" name="btnLoginSubmit" value="Login" class="btn btn-success btn-block"/>
+		<input type="reset" name="btnLoginReset" value="Reset" class="btn btn-danger btn-block"/>
 	</fieldset>
 
 </form>

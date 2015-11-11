@@ -11,7 +11,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<spring:url value="/" />">MUM Scrum</a>
+                <a class="navbar-brand" href="<spring:url value="/" />">MUM Scrum <small> - 4S</small></a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -59,7 +59,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="<spring:url value="/logout" />"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -82,11 +82,8 @@
                         </ul>
                     </li>
                         
-                        <li>
-                            <a href="<spring:url value="/productbacklog" />"><i class="fa fa-table fa-fw"></i> Product Backlog</a>
-                        </li>
-                        <li>
-                            <a href="<spring:url value="/userstory/" />"><i class="fa fa-edit fa-fw"></i> User Story</a>
+                       <li>
+                            <a href="<spring:url value="/userstory/" />"><i class="fa fa-list-ol fa-fw"></i> User Story</a>
                         </li>
                         <li>
                             <a href="<spring:url value="/releasebacklog/list" />"><i class="fa fa-sitemap fa-fw"></i> Release Backlog</a>
@@ -95,7 +92,7 @@
                             <a href="<spring:url value="/sprint/" />"><i class="fa fa-files-o fa-fw"></i> Sprint</a>
                         </li>
                         <li>
-                            <a href="<spring:url value="/employee" />"><i class="fa fa-user fa-fw"></i> Employee</a>
+                            <a href="<spring:url value="/employee" />"><i class="fa fa-users fa-fw"></i> Employee</a>
                         </li>
 
                 </ul>
