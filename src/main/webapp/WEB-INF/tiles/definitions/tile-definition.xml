@@ -5,8 +5,8 @@
 <tiles-definitions>
 	
 	<definition name="baseLayout" template="/WEB-INF/tiles/template/baseLayout.jsp">
-		<put-attribute name="title" value="MUMScrum" />
-		<put-attribute name="header" value="/WEB-INF/tiles/template/header.jsp" />
+		<put-attribute name="title" value="MUM Scrum - 4S" />
+		<!-- <put-attribute name="header" value="/WEB-INF/tiles/template/header.jsp" /> -->
  		<put-attribute name="navigation" value="/WEB-INF/tiles/template/navigation.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp" />
