@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.mum.mumscrum.entity.Employee;
 import edu.mum.mumscrum.entity.Role;
+import edu.mum.mumscrum.response.Response;
 import edu.mum.mumscrum.response.ResponseStatusException;
 import edu.mum.mumscrum.service.EmployeeService;
 import edu.mum.mumscrum.service.RoleService;
@@ -78,7 +80,7 @@ public class EmployeeController {
 					employeeImage.transferTo(new File(rootDictory+ "resources\\employeeImages\\"+imageSaveName));
 				}
 				//save
-				employeeService.add(employee);
+				employeeService.addEmployee(employee);
 				return "redirect:/employee";
 			} else {
 				
@@ -99,6 +101,15 @@ public class EmployeeController {
 			throw new ResponseStatusException("The requested user exist doesn't exist.");
 		model.addAttribute("employee", employee);
 		return "employee/detail";
+	}
+	
+	@RequestMapping(value="/delete/{employeeId}", method=RequestMethod.DELETE)
+	public @ResponseBody Response deleteEmployee(@PathVariable int employeeId){
+		employeeService.deleteEmployee(employeeId);
+		Response response = new Response();
+		response.setMessage("Record successfully deleted.");
+		response.setSuccess(true);
+		return response;
 	}
 
 	
