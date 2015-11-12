@@ -37,7 +37,7 @@
 									<td>${item.email}</td>
 									<td>${item.phone}</td>
 									<td><img
-										src="<spring:url value="/resource/employeeImages/${item.imageUrl}" />"
+										src="<spring:url value="/resources/employeeImages/${item.imageUrl}" />"
 										width="90px" /></td>
 									<td align="right"><a
 										href="<spring:url value="/employee/edit/${item.id}" />"

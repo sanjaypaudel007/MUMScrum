@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -18,23 +17,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
 
 import edu.mum.mumscrum.enums.Status;
 
-@Entity(name="Sprint")
+@Entity
 public class Sprint {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -48,10 +36,8 @@ public class Sprint {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "releaseBacklog_id")
 	private ReleaseBacklog releaseBacklog;
-	
 	@OneToMany(mappedBy = "sprint", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<UserStory> userStories;
-	
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	
@@ -93,6 +79,25 @@ public class Sprint {
 
 	public void setUserStories(List<UserStory> userStories) {
 		this.userStories = userStories;
+	}
+
+	public Map<Date, Double> generateBurndownChart(Date today) {
+		Map<Date, Double> result = new TreeMap<Date, Double>(); // TreeMap
+																// automatically
+																// sorts
+		for (UserStory us : userStories) {
+			Map<Date, Double> burnDownForUserStory = us.getBurndownData(today);
+			Iterator<Date> datesIterator = burnDownForUserStory.keySet().iterator();
+			while (datesIterator.hasNext()) {
+				Date date = datesIterator.next();
+				if (result.containsKey(date)) {
+					result.put(date, result.get(date) + burnDownForUserStory.get(date));
+				} else {
+					result.put(date, burnDownForUserStory.get(date));
+				}
+			}
+		}
+		return result;
 	}
 
 	public Date getStartDate() {

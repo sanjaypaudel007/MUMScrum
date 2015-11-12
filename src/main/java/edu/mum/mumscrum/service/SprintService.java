@@ -2,6 +2,7 @@ package edu.mum.mumscrum.service;
 
 import java.util.List;
 
+import edu.mum.mumscrum.entity.Pair;
 import edu.mum.mumscrum.entity.Sprint;
 import edu.mum.mumscrum.entity.UserStory;
 
@@ -17,7 +18,7 @@ public interface SprintService {
 	
 	public List<Sprint> getAllList();
 	
-	//public List< Pair<Integer, String> > getOptionList(Long releaseBacklogId);
+	public List< Pair<Integer, String> > getOptionList(Long releaseBacklogId);
 	
 	public Sprint getDetailWithUserStories(Long sprintId);
 

@@ -60,31 +60,10 @@ public class EmployeeServiceImp implements EmployeeService {
 		return pass1.encode(password);
 	}
 
-	public boolean checkPassword(String password, String encodedPassword) {
-		BCryptPasswordEncoder passEncoder = new BCryptPasswordEncoder();
-		return passEncoder.matches(password, encodedPassword);
-	}
-
 	@Override
 	public Employee validateEmployee(Employee employee) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-	@Override
-	public List<Employee> getEmployeeByName(String name) {
-	return employeeRepository.getEmployeeByName(name);
-	}
-	@Override
-	public List<Employee> getScrumMasters() {
-		return employeeRepository.getEmployeesByRole("SCRUM_MASTER");
-	}
-	@Override
-	public List<Employee> getAllDevelopers() {
-		return employeeRepository.getEmployeesByRole("DEVELOPER");
-	}
-	@Override
-	public List<Employee> getAllTesters() {
-		return employeeRepository.getEmployeesByRole("TESTER");
 	}
 
 }

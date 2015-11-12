@@ -24,3 +24,4 @@ public interface UserStoryRepository extends CrudRepository<UserStory, Long>{
 	@Query("SELECT u FROM UserStory u WHERE u.status = :userStoryStatus AND (u.developer =:employee OR u.tester = :employee) AND u.sprint = :s")
 	public List<UserStory> getSprintUserStoriesForEstimation(@Param("s") Sprint sprint,@Param("employee") Employee developerOrTester, @Param("userStoryStatus") Status status);
 }
+

@@ -10,12 +10,12 @@
 	
 	
 	<fieldset>
-		<div class="form-group">
-			<input class="form-control" placeholder="Username" name="username"
+		<div>
+			<input placeholder="Username" name="username" class="form-control"
 				type="text" autofocus>
 		</div>
-		<div class="form-group">
-			<input class="form-control" placeholder="Password" name="password"
+		<div>
+			<input placeholder="Password" name="password" class="form-control"
 				type="password" value="">
 		</div>
 		<!-- div class="checkbox">
@@ -24,8 +24,8 @@
 			</label>
 		</div> -->
 		<!-- Change this to a button or input when using this as a form -->
-		<input type="submit" name="btnLoginSubmit" value="Login"
-			class="btn btn-lg btn-success btn-block" />
+		<input type="submit" name="btnLoginSubmit" value="Login" class="btn btn-success btn-block"/>
+		<input type="reset" name="btnLoginReset" value="Reset" class="btn btn-danger btn-block"/>
 	</fieldset>
 
 </form>

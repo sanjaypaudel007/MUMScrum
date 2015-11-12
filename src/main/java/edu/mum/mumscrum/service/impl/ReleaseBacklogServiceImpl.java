@@ -1,7 +1,6 @@
 package edu.mum.mumscrum.service.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,18 +8,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import mum.edu.mumscrum.entities.Employee;
-import mum.edu.mumscrum.entities.Pair;
-import mum.edu.mumscrum.entities.ProductBacklog;
-import mum.edu.mumscrum.entities.ReleaseBacklog;
-import mum.edu.mumscrum.entities.UserStory;
-import mum.edu.mumscrum.enums.Status;
-import mum.edu.mumscrum.repository.EmployeeRepository;
-import mum.edu.mumscrum.repository.ProductBacklogRepository;
-import mum.edu.mumscrum.repository.ReleaseBacklogRepository;
-import mum.edu.mumscrum.repository.UserStoryRepository;
-import mum.edu.mumscrum.response.ResponseStatusException;
-import mum.edu.mumscrum.service.ReleaseBacklogService;
+import edu.mum.mumscrum.entity.Employee;
+import edu.mum.mumscrum.entity.ReleaseBacklog;
+import edu.mum.mumscrum.entity.UserStory;
+import edu.mum.mumscrum.enums.Status;
+import edu.mum.mumscrum.repository.EmployeeRepository;
+import edu.mum.mumscrum.repository.ReleaseBacklogRepository;
+import edu.mum.mumscrum.repository.UserStoryRepository;
+import edu.mum.mumscrum.response.ResponseStatusException;
+import edu.mum.mumscrum.service.ReleaseBacklogService;
 
 @Service
 public class ReleaseBacklogServiceImpl implements ReleaseBacklogService {
@@ -28,26 +24,17 @@ public class ReleaseBacklogServiceImpl implements ReleaseBacklogService {
 	@Autowired
 	ReleaseBacklogRepository releaseBacklogRepository ;
 	@Autowired
-	ProductBacklogRepository productBacklogRepository;
-	@Autowired
 	UserStoryRepository userStoryRepository;
 	@Autowired
 	EmployeeRepository employeeRepository;
-	
-	@Override
-	public List<ReleaseBacklog> getReleaseBacklogFor(Long productBacklogId) {
-		ProductBacklog pb = productBacklogRepository.findOne(productBacklogId);
-		List<ReleaseBacklog> list = releaseBacklogRepository.getForProductBacklog(pb);
-		return list;
-	}
 
-	@Override
-	public void add(ReleaseBacklog releaseBacklog , Long productBacklogId) {
-		ProductBacklog pb = productBacklogRepository.findOne(productBacklogId);
-		releaseBacklog.setProductBacklog(pb);
-		releaseBacklog.setStatus(Status.NEW);
-		releaseBacklogRepository.save(releaseBacklog);
-	}
+//	@Override
+//	public void add(ReleaseBacklog releaseBacklog , Long productBacklogId) {
+//		ProductBacklog pb = productBacklogRepository.findOne(productBacklogId);
+//		releaseBacklog.setProductBacklog(pb);
+//		releaseBacklog.setStatus(Status.NEW);
+//		releaseBacklogRepository.save(releaseBacklog);
+//	}
 
 	@Override
 	public ReleaseBacklog getDetail(long releaseBacklogId) {
@@ -57,7 +44,7 @@ public class ReleaseBacklogServiceImpl implements ReleaseBacklogService {
 	@Override
 	public void edit(Long releaseBacklogId, ReleaseBacklog releaseBacklog) {
 		ReleaseBacklog rb = releaseBacklogRepository.findOne(releaseBacklogId);
-		releaseBacklog.setProductBacklog(rb.getProductBacklog());
+//		releaseBacklog.setProductBacklog(rb.getProductBacklog());
 		releaseBacklogRepository.save(releaseBacklog);
 	}
 
@@ -67,19 +54,19 @@ public class ReleaseBacklogServiceImpl implements ReleaseBacklogService {
 		return (List<ReleaseBacklog>)releaseBacklogRepository.findAll();
 	}
 	
-	@Override
-	public List< Pair<Integer, String> > getOptionList(Long productBacklogId) {
-		List< Pair<Integer, String>> optionList = new ArrayList< Pair<Integer,String>>();
-		ProductBacklog productBacklog = productBacklogRepository.findOne(productBacklogId);
-		List<ReleaseBacklog> releaseBacklogList = releaseBacklogRepository.getForProductBacklog(productBacklog);
-		
-		if(releaseBacklogList != null){
-			for(ReleaseBacklog releaseBacklog: releaseBacklogList){
-				optionList.add(new Pair(releaseBacklog.getId(), releaseBacklog.getName()));
-			}
-		}
-		return optionList;
-	}
+//	@Override
+//	public List< Pair<Integer, String> > getOptionList(Long productBacklogId) {
+//		List< Pair<Integer, String>> optionList = new ArrayList< Pair<Integer,String>>();
+//		ProductBacklog productBacklog = productBacklogRepository.findOne(productBacklogId);
+//		List<ReleaseBacklog> releaseBacklogList = releaseBacklogRepository.getForProductBacklog(productBacklog);
+//		
+//		if(releaseBacklogList != null){
+//			for(ReleaseBacklog releaseBacklog: releaseBacklogList){
+//				optionList.add(new Pair(releaseBacklog.getId(), releaseBacklog.getName()));
+//			}
+//		}
+//		return optionList;
+//	}
 
 	@Override
 	@Transactional
@@ -159,8 +146,8 @@ public class ReleaseBacklogServiceImpl implements ReleaseBacklogService {
 		releaseBacklog.setStartDate(changedReleaseBacklog.getStartDate());
 		releaseBacklog.setDeadline(changedReleaseBacklog.getDeadline());
 		releaseBacklog.setStatus(Status.ASSIGNED);
-		releaseBacklog.getProductBacklog().setStatus(Status.IN_PROGRESS);
-		productBacklogRepository.save(releaseBacklog.getProductBacklog());
+//		releaseBacklog.getProductBacklog().setStatus(Status.IN_PROGRESS);
+//		productBacklogRepository.save(releaseBacklog.getProductBacklog());
 		releaseBacklogRepository.save(releaseBacklog);
 	}
 }

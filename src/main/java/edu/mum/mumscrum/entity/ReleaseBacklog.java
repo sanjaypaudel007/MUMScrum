@@ -13,24 +13,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
 
 import edu.mum.mumscrum.enums.Status;
 
-@Entity(name="ReleaseBacklog")
+@Entity
 public class ReleaseBacklog {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -132,4 +123,8 @@ public class ReleaseBacklog {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-}
+
+
+	}
+
+

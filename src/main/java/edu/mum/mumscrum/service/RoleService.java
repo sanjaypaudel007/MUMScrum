@@ -15,6 +15,4 @@ public interface RoleService {
 	
 	public List<Role> getAllList();
 	
-//	public Map<String, String> getOptionList();
-	
 }
