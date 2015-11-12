@@ -21,7 +21,7 @@
 				  <dt>Email: </dt><dd><c:out value="${employee.email}"></c:out></dd>
 				  <dt>Date Of Birth: </dt><dd><c:out value="${employee.dob}"></c:out></dd>
 				  <dt>Salary: </dt><dd><c:out value="${employee.salary}"></c:out></dd>
-				  <dt>Image: </dt><dd><img src="<spring:url value="/resources/employeeImages/${employee.imageUrl}" />" width="90px"/></dd>
+				  <dt>Image: </dt><dd><img src="<spring:url value="/resource/employeeImages/${employee.imageUrl}" />" width="90px"/></dd>
 				  <dt>Role: </dt><dd><c:out value="${employee.role.name}"></c:out><br/> </dd>
 				</dl>
 			
