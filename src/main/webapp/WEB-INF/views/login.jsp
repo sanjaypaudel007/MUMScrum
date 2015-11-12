@@ -10,12 +10,12 @@
 	
 	
 	<fieldset>
-		<div>
-			<input placeholder="Username" name="username" class="form-control"
+		<div class="form-group">
+			<input class="form-control" placeholder="Username" name="username"
 				type="text" autofocus>
 		</div>
-		<div>
-			<input placeholder="Password" name="password" class="form-control"
+		<div class="form-group">
+			<input class="form-control" placeholder="Password" name="password"
 				type="password" value="">
 		</div>
 		<!-- div class="checkbox">

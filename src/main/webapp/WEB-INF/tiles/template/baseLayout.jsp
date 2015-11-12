@@ -19,16 +19,16 @@
 <title>MUM Scrum - 4S</title>
 
 <!-- Bootstrap Core CSS -->
-<link href=<spring:url value="/resources/sb-admin/css/bootstrap.min.css" /> rel="stylesheet">
+<link href="<spring:url value="/resource/sb-admin/css/bootstrap.min.css" />" rel="stylesheet">
 
 <!-- Custom CSS -->
-<link href=<spring:url value="/resources/sb-admin/css/sb-admin.css" /> rel="stylesheet">
+<link href="<spring:url value="/resource/sb-admin/css/sb-admin.css" />" rel="stylesheet">
 
 <!-- Morris Charts CSS -->
-<link href=<spring:url value="/resources/sb-admin/css/plugins/morris.css" /> rel="stylesheet">
+<link href="<spring:url value="/resource/sb-admin/css/plugins/morris.css" />" rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href=<spring:url value="/resources/sb-admin/font-awesome/css/font-awesome.min.css" />
+<link href="<spring:url value="/resource/sb-admin/font-awesome/css/font-awesome.min.css" />"
 	rel="stylesheet" type="text/css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -68,15 +68,15 @@
 
 
 	<!-- jQuery -->
-	<script src="resources/sb-admin/js/jquery.js"></script>
+	<script src="<spring:url value="/resource/sb-admin/js/jquery.js" />"></script>
 
 	<!-- Bootstrap Core JavaScript -->
-	<script src="resources/sb-admin/js/bootstrap.min.js"></script>
+	<script src="<spring:url value="/resource/sb-admin/js/bootstrap.min.js" />"></script>
 
 	<!-- Morris Charts JavaScript -->
-	<script src=<spring:url value="resources/sb-admin/js/plugins/morris/raphael.min.js" />></script>
-	<script src=<spring:url value="resources/sb-admin/js/plugins/morris/morris.min.js" />></script>
-	<script src=<spring:url value="resources/sb-admin/js/plugins/morris/morris-data.js" />></script>
+	<script src="<spring:url value="/resource/sb-admin/js/plugins/morris/raphael.min.js" />"></script>
+	<script src="<spring:url value="/resource/sb-admin/js/plugins/morris/morris.min.js" />"></script>
+	<script src="<spring:url value="/resource/sb-admin/js/plugins/morris/morris-data.js" />"></script>
 
 </body>
 </html>

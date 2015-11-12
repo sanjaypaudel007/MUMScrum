@@ -98,19 +98,17 @@ public class UserStoryController {
 	@RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.GET)
 	public String edit(@PathVariable("id") long userStoryId, ModelMap model) {
 
-//		UserStory userStory = userStoryService.getDetail(userStoryId);
-//		if (userStory == null)
-//			throw new ResponseStatusException();
-//
-//		List<ProductBacklog> listProductBackLog = productBacklogService.getAllList();
-//		// List<ReleaseBacklog> listReleaseBackLog =
-//		// releaseBacklogService.getReleaseBacklogFor(productBacklogId);
-//
-//		model.addAttribute("listProductBackLog", listProductBackLog);
-//		// model.addAttribute("listReleaseBackLog", listReleaseBackLog);
-//		model.addAttribute("userStory", userStory);
-//		model.addAttribute("buttonName", "Update");
-//		model.addAttribute("title", "Edit");
+		UserStory userStory = userStoryService.getDetail(userStoryId);
+		if (userStory == null)
+			throw new ResponseStatusException();
+
+		// List<ReleaseBacklog> listReleaseBackLog =
+		// releaseBacklogService.getReleaseBacklogFor(productBacklogId);
+
+		// model.addAttribute("listReleaseBackLog", listReleaseBackLog);
+		model.addAttribute("userStory", userStory);
+		model.addAttribute("buttonName", "Update");
+		model.addAttribute("title", "Edit");
 		return "userstory/add";
 
 	}

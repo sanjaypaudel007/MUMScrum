@@ -4,10 +4,13 @@ import java.util.List;
 
 import edu.mum.mumscrum.entity.UserStory;
 
-public interface UserStoryService {
-//	public List<UserStory> getUserStoryFor(Long productBacklogId);
 
-//	public void add(UserStory userStory, Long productBacklogId);
+
+
+public interface UserStoryService {
+	//public List<UserStory> getUserStoryFor(Long releaseBacklogId);
+
+//	public void add(UserStory userStory, Long releaseBacklogId);
 
 	public UserStory getDetail(long userStoryId);
 

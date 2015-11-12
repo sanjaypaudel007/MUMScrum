@@ -1,11 +1,14 @@
 package edu.mum.mumscrum.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.mum.mumscrum.entity.ReleaseBacklog;
 import edu.mum.mumscrum.entity.UserStory;
+import edu.mum.mumscrum.repository.ReleaseBacklogRepository;
 import edu.mum.mumscrum.repository.UserStoryRepository;
 import edu.mum.mumscrum.service.UserStoryService;
 
@@ -16,15 +19,15 @@ public class UserStoryServiceImpl implements UserStoryService {
 	UserStoryRepository userStoryRepository;
 
 //	@Override
-//	public List<UserStory> getUserStoryFor(Long productBacklogId) {
-//		ProductBacklog pb = productBacklogRepository.findOne(productBacklogId);
+//	public List<UserStory> getUserStoryFor(Long releaseBacklogId) {
+//		ReleaseBacklog pb = ReleaseBacklogRepository.findOne(releaseBacklogId);
 //		List<UserStory> list = userStoryRepository.getForUserStory(pb);
 //		return list;
 //	}
 
 //	@Override
-//	public void add(UserStory userStory, Long productBaklogId) {
-//		ProductBacklog pb = productBacklogRepository.findOne(productBaklogId);
+//	public void add(UserStory userStory, Long releaseBacklogId) {
+//		ReleaseBacklog rb = ReleaseBacklogRepository.findOne(releaseBacklogId);
 //		userStoryRepository.save(userStory);
 //
 //	}
@@ -38,7 +41,7 @@ public class UserStoryServiceImpl implements UserStoryService {
 	public void edit(Long userStoryId, UserStory userStory) {
 
 		UserStory rb = userStoryRepository.findOne(userStoryId);
-//		userStory.setProductBacklog(rb.getProductBacklog());
+		userStory.setReleaseBacklog(rb.getReleaseBacklog());
 		userStoryRepository.save(userStory);
 
 	}
