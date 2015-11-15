@@ -41,6 +41,9 @@
 		<div class="panel-heading" ><!-- onclick="showReleaseList('${productBacklog.id}')"> -->
 		<i class="fa fa-list fa-fw"></i>User Stories</div>
 			<div class="panel-body">
+				<security:authorize access="hasRole('SCRUM_MASTER')"> 
+					<div class="pull-right"><a href="<spring:url value="/userstory/add?releasebacklog=${releaseBacklog.id}" />" class="btn btn-outline btn-primary btn-xs" type="submit">Add</a></div>
+				</security:authorize>
 				 <table class="table">
                                     <thead>
                                         <tr>
@@ -52,37 +55,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    	<tr><td colspan="5"><i><b>In release backlog</b></i></td></tr>
                                     	<c:forEach items="${addedUserStories}" var="item" varStatus="count">
-										    <tr id="row-${count.count}" style="background-color:CCFFFF;">
-										      <td>${count.count}</td>
-										      <td>${item.name}</td>
-										      <td>${item.status}</td>
-										      <td>${item.priority }</td>
-										      <td align="right">										      
-										      <a href="<spring:url value="/userstory/detail/${item.id}" />" title="Detail"><i class="fa fa-eye fa-fw"></i></a>
-										       <security:authorize access="hasRole('SCRUM_MASTER')">
-										      <a title="Remove from Release Backlog" onclick="return confirm('Are you sure to remove User Story from Release Backlog?');" href="<spring:url value="/releasebacklog/${releaseBacklog.id}/removeus/${item.id}" />"><i class="fa  fa-remove fa-fw"></i></a>									      	
-										      </security:authorize>
-										      </td>										   
-										    </tr>										    
-										    </c:forEach>
-										    <tr><td colspan="5"><i><b>In product backlog</b></i></td></tr>
-										    <%-- <c:forEach items="${notAddedUserStories}" var="item" varStatus="count">
 										    <tr id="row-${count.count}">
 										      <td>${count.count}</td>
 										      <td>${item.name}</td>
 										      <td>${item.status}</td>
 										      <td>${item.priority }</td>
-										      <td align="right">
-										      <a href="<spring:url value="/userstory/detail/${item.id}" />" title="Detail"><i class="fa fa-eye fa-fw"></i></a>
-										       <security:authorize access="hasRole('SCRUM_MASTER')">
-										      	<a href="<spring:url value="/releasebacklog/${releaseBacklog.id}/addus/${item.id}" />" title="Add to Release Backlog"><i class="fa fa-plus fa-fw"></i></a>
-										      	</security:authorize>								      	
-										      	</td>
-										   
-										    </tr>
-										    </c:forEach> --%>
+										      <td align="right">										      
+											      <a href="<spring:url value="/userstory/detail/${item.id}" />" title="Detail"><i class="fa fa-eye fa-fw"></i></a>
+											       <security:authorize access="hasRole('SCRUM_MASTER')">
+											       		<a href="<spring:url value="/userstory/edit/${item.id}" />" title="Edit"><i class="fa fa-edit fa-fw"></i></a>
+											       		<a title="Delete" onclick="return false;" data-action="delete-toggle" data-target="row-${count.count}" href="<spring:url value="/userstory/delete/${item.id}" />"><i class="fa  fa-trash-o fa-fw"></i></a>
+											      </security:authorize>
+										      </td>										   
+										    </tr>										    
+										    </c:forEach>
                                         
                                     </tbody>
                                 </table>
@@ -104,8 +91,8 @@
                                             <th>#</th>
                                             <th>Name</th>
                                             <th>Description</th>
-                                            <th>Date</th>
                                             <th>Status</th>
+                                            <th>Date</th>
                                             <th align="center">Action</th>
                                         </tr>
                                     </thead>
