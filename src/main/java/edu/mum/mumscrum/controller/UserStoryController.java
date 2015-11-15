@@ -117,14 +117,14 @@ public class UserStoryController {
 	public String update(@PathVariable int id, @Valid @ModelAttribute UserStory userStory, BindingResult result,
 			ModelMap model) {
 
-//		model.addAttribute("buttonName", "Update");
-//		model.addAttribute("title", "Edit");
-//		if (result.hasErrors()) {
-//			return "userstory/add";
-//		}
-//		userStoryService.edit(userStory.getId(), userStory.getName(), userStory.getDescription(),
-//				userStory.getDevelopmentEstimate());
-		return "redirect:/productbacklog/detail/" + userStory.getId();
+		model.addAttribute("buttonName", "Update");
+		model.addAttribute("title", "Edit");
+		if (result.hasErrors()) {
+			return "userstory/add";
+		}
+		userStoryService.edit(userStory.getId(), userStory.getName(), userStory.getDescription(),
+				userStory.getDevelopmentEstimate());
+		return "redirect:/userstory/detail/" + userStory.getId();
 
 	}
 

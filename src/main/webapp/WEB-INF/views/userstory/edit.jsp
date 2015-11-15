@@ -69,7 +69,7 @@
         	</div>
         </div>
 		<input class="btn btn-primary" type="submit" value="${buttonName}"/>
-		<input type="button" onclick="document.location.href='<spring:url value="/productbacklog" />'" 
+		<input type="button" onclick="document.location.href='<spring:url value="/userstory" />'" 
 		class="btn btn-warning" value=" Cancel ">
     
 	</form:form>
