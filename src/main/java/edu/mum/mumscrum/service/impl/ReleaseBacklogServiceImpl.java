@@ -28,13 +28,13 @@ public class ReleaseBacklogServiceImpl implements ReleaseBacklogService {
 	@Autowired
 	EmployeeRepository employeeRepository;
 
-//	@Override
-//	public void add(ReleaseBacklog releaseBacklog , Long productBacklogId) {
+	@Override
+	public void add(ReleaseBacklog releaseBacklog) {
 //		ProductBacklog pb = productBacklogRepository.findOne(productBacklogId);
 //		releaseBacklog.setProductBacklog(pb);
 //		releaseBacklog.setStatus(Status.NEW);
-//		releaseBacklogRepository.save(releaseBacklog);
-//	}
+		releaseBacklogRepository.save(releaseBacklog);
+	}
 
 	@Override
 	public ReleaseBacklog getDetail(long releaseBacklogId) {

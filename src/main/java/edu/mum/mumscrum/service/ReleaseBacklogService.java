@@ -7,7 +7,7 @@ import edu.mum.mumscrum.entity.ReleaseBacklog;
 public interface ReleaseBacklogService {
 	//public List<ReleaseBacklog> getReleaseBacklogFor(Long productBacklogId);
 
-	//public void add(ReleaseBacklog releaseBacklog, Long productBacklogId);
+	public void add(ReleaseBacklog releaseBacklog);
 
 	public ReleaseBacklog getDetail(long releaseBacklogId);
 
