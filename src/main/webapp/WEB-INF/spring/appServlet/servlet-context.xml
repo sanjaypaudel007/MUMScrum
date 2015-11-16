@@ -49,7 +49,7 @@
 	 	</beans:bean>	 	
 	 	<interceptor>
         	<mapping path="/**"/>
-        	<beans:bean class="mum.edu.mumscrum.interceptor.SecurityInterceptor" />
+        	<beans:bean class="edu.mum.mumscrum.interceptor.SecurityInterceptor" />
     	</interceptor>
  	</interceptors>
 	

@@ -1,4 +1,4 @@
-package mum.edu.mumscrum.interceptor;
+package edu.mum.mumscrum.interceptor;
 
 import java.security.Principal;
 
