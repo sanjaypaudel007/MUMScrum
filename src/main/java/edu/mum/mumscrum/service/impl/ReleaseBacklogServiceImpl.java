@@ -28,13 +28,13 @@ public class ReleaseBacklogServiceImpl implements ReleaseBacklogService {
 	@Autowired
 	EmployeeRepository employeeRepository;
 
-//	@Override
-//	public void add(ReleaseBacklog releaseBacklog , Long productBacklogId) {
-//		ProductBacklog pb = productBacklogRepository.findOne(productBacklogId);
-//		releaseBacklog.setProductBacklog(pb);
-//		releaseBacklog.setStatus(Status.NEW);
-//		releaseBacklogRepository.save(releaseBacklog);
-//	}
+	@Override
+	public void add(ReleaseBacklog releaseBacklog) {
+		//ProductBacklog pb = productBacklogRepository.findOne(productBacklogId);
+		//releaseBacklog.setProductBacklog(pb);
+		releaseBacklog.setStatus(Status.NEW);
+		releaseBacklogRepository.save(releaseBacklog);
+	}
 
 	@Override
 	public ReleaseBacklog getDetail(long releaseBacklogId) {
@@ -134,7 +134,7 @@ public class ReleaseBacklogServiceImpl implements ReleaseBacklogService {
 
 	@Override
 	@Transactional
-	@PreAuthorize(value="hasRole('PRODUCT_OWNER')")
+	//@PreAuthorize(value="hasRole('PRODUCT_OWNER')")
 	public void setScrumMaster(ReleaseBacklog changedReleaseBacklog, Integer scrumMasterId) {
 		ReleaseBacklog releaseBacklog = releaseBacklogRepository.findOne(changedReleaseBacklog.getId());
 		if (releaseBacklog == null)
