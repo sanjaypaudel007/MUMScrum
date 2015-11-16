@@ -49,11 +49,11 @@ public class ReleaseBacklogController {
 		return list;
 	}
 	
-	@RequestMapping(value="/add", method= RequestMethod.GET)
-	//public String getFormForAddReleaseBacklog(@PathVariable("pb_id") Long productBacklog, Model model){
-	public String getFormForAddReleaseBacklog(@ModelAttribute ("releaseBacklog") ReleaseBacklog rb, Model model){
+	@RequestMapping(value="/add{rb_id}", method= RequestMethod.GET)
+	public String getFormForAddReleaseBacklog(@PathVariable("rb_id") Long releaseBacklog, Model model){
+	//public String getFormForAddReleaseBacklog(@ModelAttribute ("releaseBacklog") ReleaseBacklog rb, Model model){
 		//ProductBacklog pb = productBacklogService.getDetail(productBacklog);
-		//ReleaseBacklog rb = new ReleaseBacklog();
+		ReleaseBacklog rb =  releaseBacklogService.getDetail(releaseBacklog);
 		//rb.setProductBacklog(pb);
 		model.addAttribute("releaseBacklog", rb);
 		model.addAttribute("buttonName", "Save");
@@ -62,8 +62,8 @@ public class ReleaseBacklogController {
 	}
 	
 	
-	@RequestMapping(value="/add", method= RequestMethod.POST)
-	//public String addReleaseBacklog(@PathVariable("pb_id") Long productBacklog,
+	@RequestMapping(value="/add{rb_id}", method= RequestMethod.POST)
+	//public String addReleaseBacklog(@PathVariable("rb_id") Long productBacklog,
 	public String addReleaseBacklog(@ModelAttribute("releaseBacklog") @Valid ReleaseBacklog releaseBacklog, 
 			BindingResult br, Model model){
 		if(br.hasErrors()){

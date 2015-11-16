@@ -12,7 +12,7 @@
 <div class="row">
 	<div class="col-lg-12">
 
-	<form:form commandName="releaseBacklog" method="post" class="form">
+	<form:form modelAttribute="releaseBacklog" method="post" class="form">
 	<!-- 
 	<c:set var="validationErrors"><form:errors path="*"/></c:set>
 	<c:if test="${not empty validationErrors}">
