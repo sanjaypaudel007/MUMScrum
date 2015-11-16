@@ -64,7 +64,12 @@ public class EmployeeServiceImp implements EmployeeService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
-
+	@Override
+	public List<Employee> getAllDevelopers() {
+		return employeeRepository.getEmployeesByRole("DEVELOPER");
+	}
+	@Override
+	public List<Employee> getAllTesters() {
+		return employeeRepository.getEmployeesByRole("TESTER");
+	}
 }
