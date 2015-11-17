@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import edu.mum.mumscrum.entity.Employee;
 import edu.mum.mumscrum.entity.ReleaseBacklog;
 import edu.mum.mumscrum.entity.UserStory;
 import edu.mum.mumscrum.enums.Status;
 import edu.mum.mumscrum.response.Response;
 import edu.mum.mumscrum.response.ResponseStatusException;
+import edu.mum.mumscrum.service.EmployeeService;
 import edu.mum.mumscrum.service.ReleaseBacklogService;
 import edu.mum.mumscrum.service.UserStoryService;
 
@@ -36,6 +38,9 @@ public class UserStoryController {
 
 	@Autowired
 	ReleaseBacklogService releaseBacklogService;
+
+	@Autowired
+	EmployeeService employeeService;
 
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public String index(Model model, HttpServletRequest request) {
@@ -78,7 +83,7 @@ public class UserStoryController {
 		if (br.hasErrors()) {
 			model.addAttribute("buttonName", "Save");
 			model.addAttribute("title", "Add");
-			//model.addAttribute("userStory", userStory);
+			// model.addAttribute("userStory", userStory);
 			return "userstory/add";
 		}
 		logger.info("Adding new release");
@@ -122,21 +127,37 @@ public class UserStoryController {
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	// @ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public @ResponseBody Response delete(@PathVariable long id, HttpServletRequest request) throws RuntimeException {
-//		productBacklogService.delete(id);
+		// productBacklogService.delete(id);
 		Response response = new Response();
 		response.setMessage("Record successfully deleted.");
 		response.setSuccess(true);
 		return response;
 	}
 
-	@RequestMapping(value = "/detail/{id}")
-	public String displayProductBacklog(@PathVariable long id, ModelMap model) {
+	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
+	public String displayUserstoryDetails(@PathVariable long id, ModelMap model) {
 
 		UserStory userStory = userStoryService.getDetail(id);
+		Employee developer = userStory.getDeveloper();
+		List<Employee> developers = employeeService.getAllDevelopers();
+		Employee tester = userStory.getTester();
+
+		List<Employee> testers = employeeService.getAllTesters();
+
 		if (userStory == null)
 			throw new ResponseStatusException("The requested user exist doesn't exist.");
+
 		model.addAttribute("userStory", userStory);
+		model.addAttribute("developers", developers);
+		model.addAttribute("testers", testers);
 		return "userstory/detail";
+	}
+
+	@RequestMapping(value = "/detail/{id}", method = RequestMethod.POST)
+	public String updateUserstoryDetails(@PathVariable("id") Long userStoryId,
+			@ModelAttribute("userstory") UserStory userStory, ModelMap model) {
+		userStoryService.updateUserStory(userStory);
+		return "redirect:/userstory/list";
 	}
 
 }
