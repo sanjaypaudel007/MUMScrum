@@ -3,15 +3,16 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:url value="/employee/register" var="empUrl" />
+<c:url value="/employee/edit/${id}" var="empUrl" />
+
 <div class="row">
 	<div class="col-lg-12">
-		<h4 class="page-header">Employee Registration</h4>
+		<h4 class="page-header">Employee Update</h4>
 	</div>
 	<ol class="breadcrumb">
 	<li><i class="fa fa-users"></i><a href="<spring:url value="/employee" />" type="submit"> Employee</a></li>
 		 
-		<li class="active"> Add</li>
+		<li class="active"> Edit</li>
 	</ol>
 </div>
 
@@ -20,8 +21,7 @@
 
 
 		<form:form method="post" commandName="employee"
-			enctype="multipart/form-data" autocomplete="off" class="form"
-			action="${empUrl}">
+	enctype="multipart/form-data" autocomplete="off" class="form">
 
 			<%-- <c:set var="validationErrors">
 				<form:errors path="*" />
@@ -183,7 +183,7 @@
 					</spring:bind>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row hide" >
 				<div class="col-lg-10">
 					<spring:bind path="password">
 						<div class="form-group ${status.error ? 'has-error' : ''}">
@@ -199,7 +199,7 @@
 					</spring:bind>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row hide">
 				<div class="col-lg-10">
 					<spring:bind path="rePassword">
 						<div class="form-group ${status.error ? 'has-error' : ''}">
@@ -217,7 +217,7 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-10 col-lg-offset-2">
-					<input class="btn btn-success" type="submit" value="Register" /> <input
+					<input class="btn btn-success" type="submit" value="Update" /> <input
 						type="button"
 						onclick="document.location.href='<spring:url value="/employee" />'"
 						class="btn btn-danger" value=" Cancel ">
@@ -268,5 +268,4 @@
 
 	});
 </script>
-
 

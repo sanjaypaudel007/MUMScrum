@@ -50,7 +50,8 @@ public class EmployeeServiceImp implements EmployeeService {
 
 	public boolean checkUsername(String username, int employeeId) {
 		Employee employee = employeeRepository.getEmployeeByUsername(username);
-		return (employee != null && employee.getId() != employeeId);
+		//return (employee != null && employee.getId() != employeeId);
+		return (employee != null);
 
 	}
 

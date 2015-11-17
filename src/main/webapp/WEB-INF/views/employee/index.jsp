@@ -39,14 +39,15 @@
 									<td><img
 										src="<spring:url value="/resource/employeeImages/${item.imageUrl}" />"
 										width="90px" /></td>
-									<td align="right"><a
-										href="<spring:url value="/employee/edit/${item.id}" />"
-										title="Edit">Edit</a> <a
-										href="<spring:url value="/employee/detail/${item.id}" />"
-										title="Detail">Detail</a> <a title="Delete"
-										onclick="return false;" data-action="delete-toggle"
-										data-target="row-${count.count}"
-										href="<spring:url value="/employee/delete/${item.id}" />">Delete</a></td>
+									<td align="right">
+										<a href="<spring:url value="/employee/edit/${item.id}" />" title="Edit">Edit</a> 
+										<a href="<spring:url value="/employee/detail/${item.id}" />" title="Detail">Detail</a> 
+										<a href="<spring:url value="/employee/delete/${item.id}" />" title="Delete"
+										onclick="return confirm('Are you sure to delete this record?')" >Delete</a> 
+										<%-- <a title="Delete" onclick="return false;" data-action="delete-toggle"
+											data-target="row-${count.count}"
+											href="<spring:url value="/employee/delete/${item.id}" />">Delete</a> --%>
+									</td>
 
 								</tr>
 							</c:forEach>

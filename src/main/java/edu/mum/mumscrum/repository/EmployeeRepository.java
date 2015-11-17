@@ -21,9 +21,9 @@ public interface EmployeeRepository extends CrudRepository<Employee, Integer>{
 	@Query("select m from Employee m where username = :name")
 	List<Employee> getEmployeeByName(@Param("name") String name);
 
-	@Query("SELECT m from Employee m INNER JOIN m.role r where r.name = :role_name")
+	/*@Query("SELECT m from Employee m INNER JOIN m.role r where r.name = :role_name")
 	List<Employee> getEmployeesByRole(@Param("role_name") String role);
-	
+	*/
 	
 
 }

@@ -29,7 +29,7 @@
 			<security:jdbc-user-service
 				data-source-ref="dataSource"
 				users-by-username-query="select username,password, 'true' 'enabled' from employee where username=?"
-				authorities-by-username-query="select u1.username, u2.name from employee u1, role u2 where u1.role_id = u2.id and u1.username=?" />
+				authorities-by-username-query="select u1.username, u2.role from Employee u1 join Role u2 where  u1.username=?" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 
