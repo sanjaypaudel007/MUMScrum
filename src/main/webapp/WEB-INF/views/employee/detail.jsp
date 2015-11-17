@@ -1,40 +1,62 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>  
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div>
-	<div>
-		<h4>Employee Detail</h4>
+<div class="row">
+	<div class="col-lg-12">
+		<h4 class="page-header">Employee Detail</h4>
 	</div>
-	<!-- /.col-lg-12 -->
-</div>
-<div>
-	<div>
-		<div>
-			<div>Detail</div>
-			<div>
-				<dl>
-				  <dt>Name: </dt><dd><c:out value="${employee.firstName}"></c:out> 
-				  <c:out value="${employee.lastName}"></c:out></dd>
-				  <dt>Address: </dt><dd><c:out value="${employee.address}"></c:out></dd>
-				  <dt>Phone: </dt><dd><c:out value="${employee.phone}"></c:out></dd>
-				  <dt>Email: </dt><dd><c:out value="${employee.email}"></c:out></dd>
-				  <dt>Date Of Birth: </dt><dd><c:out value="${employee.dob}"></c:out></dd>
-				  <dt>Image: </dt><dd><img src="<spring:url value="/resource/employeeImages/${employee.imageUrl}" />" width="90px"/></dd>
-				  <dt>Role: </dt>
-				  <c:forEach items="${employee.roles}" var="role">
+	<ol class="breadcrumb">
+		<li><i class="fa fa-users"></i><a
+			href="<spring:url value="/employee" />" type="submit"> Employee</a></li>
 
-									
-										<c:out value="${role.role }" /> / 
+		<li class="active">Detail</li>
+	</ol>
+</div>
+<div class="row">
+	<div class="col-lg-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<i class="fa fa-list fa-fw"></i>Detail
+			</div>
+			<div class="panel-body">
+				<div class="media">
+					<div class="media-left">
+						<a href="#"> <img class="media-object"
+							alt=<c:out value="${employee.fullName}"></c:out>
+							src="<spring:url value="/resource/employeeImages/${employee.imageUrl}" />"
+							width="90px" />
+						</a>
+					</div>
+					<div class="media-body">
+						<h4 class="media-heading">
+							<c:out value="${employee.fullName}"></c:out>
+						</h4>
+						<c:out value="${employee.address}"></c:out>
+						<br> Phone:
+						<c:out value="${employee.phone}"></c:out>
+						<br> Email:
+						<c:out value="${employee.email}"></c:out>
+						<br> Date of Birth:
+						<c:out value="${employee.dob}"></c:out>
+						<br> Role:
+						<c:forEach items="${employee.roles}" var="role">
+
+
+							<c:out value="${role.role }" /> / 
 								</c:forEach>
-				</dl>
-			
-				<input type="button" onclick="document.location.href='<spring:url value="/employee" />'" 
-					class="btn btn-outline btn-default btn-xs" value=" List ">
-  
+
+					</div>
+				</div>
+
+
 			</div>
 		</div>
-	</div>
- </div>
-	  
+	</div>	
+</div>
+<input type="button" onclick="document.location.href='<spring:url value="/employee" />'" 
+					class="btn btn-outline btn-primary btn-xs" value="Back to List ">
+  
+
