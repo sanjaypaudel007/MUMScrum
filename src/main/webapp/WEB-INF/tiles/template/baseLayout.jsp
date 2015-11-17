@@ -69,6 +69,8 @@
 
 	</div>
 	<!-- /#wrapper -->
+	
+	<script type="text/javascript" src="<spring:url value="/resource/js/site.js" />"></script>
 
 	<!-- Custom jQuery -->
 	<script src="<spring:url value="/resource/custom/js/custom.js" />"></script>
