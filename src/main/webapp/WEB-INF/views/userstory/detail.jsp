@@ -66,7 +66,7 @@
 											<c:forEach items="${developers}" var="dev"
 												varStatus="devCount">
 												<c:choose>
-													<c:when test="${developer.id == dev.id }">
+													<c:when test="${userStory.developer.id == dev.id }">
 														<option value="${dev.id }" selected>${dev.fullName }</option>
 													</c:when>
 													<c:otherwise>
@@ -79,7 +79,7 @@
 											<c:forEach items="${testers}" var="test"
 												varStatus="testCount">
 												<c:choose>
-													<c:when test="${test.id == tester.id }">
+													<c:when test="${userStory.tester.id == test.id }">
 														<option value="${test.id }" selected>${test.fullName }</option>
 													</c:when>
 													<c:otherwise>
