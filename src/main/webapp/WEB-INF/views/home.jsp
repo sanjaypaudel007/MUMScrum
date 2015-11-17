@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@ page session="false"%>
 <html>
 <head>
@@ -14,6 +15,7 @@
 	</ol>
 	
 	<div class="row">
+				<security:authorize access="hasRole('ADMIN')">
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
@@ -36,6 +38,9 @@
                             </a>
                         </div>
                     </div>
+                 </security:authorize>
+                 
+                 <security:authorize access="hasAnyRole('SCRUM_MASTER', 'DEVELOPER', 'TESTER')">
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-green">
                             <div class="panel-heading">
@@ -80,6 +85,9 @@
                             </a>
                         </div>
                     </div>
+                    </security:authorize>
+                    
+                    <security:authorize access="hasRole('SCRUM_MASTER')">
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-red">
                             <div class="panel-heading">
@@ -102,6 +110,7 @@
                             </a>
                         </div>
                     </div>
+                    </security:authorize>
                 </div>
                 <!-- /.row -->
 
