@@ -20,4 +20,6 @@ public interface UserStoryService {
 
 	public List<UserStory> getAllListFor(String loggedInUsername);
 
+	public void updateUserStory(UserStory userStory);
+
 }
