@@ -16,7 +16,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>MUM Scrum - 4S</title>
+<title><spring:message code="basePage.title" /></title>
 
 <!-- Bootstrap Core CSS -->
 <link href="<spring:url value="/resource/sb-admin/css/bootstrap.min.css" />" rel="stylesheet">
