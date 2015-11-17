@@ -82,10 +82,10 @@ public class UserStoryServiceImpl implements UserStoryService {
 	public void updateUserStory(UserStory userStory) {
 		Employee developer = employeeRepository.findOne(userStory.getDeveloper().getId());
 		Employee tester = employeeRepository.findOne(userStory.getTester().getId());
-		userStory.setStatus(Status.ASSIGNED);
 		userStory = userStoryRepository.findOne(userStory.getId());
 		userStory.setDeveloper(developer);
 		userStory.setTester(tester);
+		userStory.setStatus(Status.ASSIGNED);
 		userStoryRepository.save(userStory);
 		
 	}
