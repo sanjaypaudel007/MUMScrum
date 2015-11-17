@@ -10,9 +10,10 @@
 		<h4 class="page-header">Employee Update</h4>
 	</div>
 	<ol class="breadcrumb">
-	<li><i class="fa fa-users"></i><a href="<spring:url value="/employee" />" type="submit"> Employee</a></li>
-		 
-		<li class="active"> Edit</li>
+		<li><i class="fa fa-users"></i><a
+			href="<spring:url value="/employee" />" type="submit"> Employee</a></li>
+
+		<li class="active">Edit</li>
 	</ol>
 </div>
 
@@ -21,7 +22,7 @@
 
 
 		<form:form method="post" commandName="employee"
-	enctype="multipart/form-data" autocomplete="off" class="form">
+			enctype="multipart/form-data" autocomplete="off" class="form">
 
 			<%-- <c:set var="validationErrors">
 				<form:errors path="*" />
@@ -157,10 +158,22 @@
 							</div>
 							<div class="col-lg-6">
 								<c:forEach items="${roleList}" var="role">
-
-									<form:checkbox path="roles" value="${role.id}"
-										label="${role.role}" />
+								<c:set var="flag" value="false"></c:set>
+									<c:forEach items="${employee.roles}" var="employeeRole">
+										<c:if test="${role.id == employeeRole.id}">
+											<c:set var="flag" value="true"></c:set>
+											<form:checkbox path="roles" value="${role.id}"
+												label="${role.role}" checked="true" />
+										</c:if>
+									</c:forEach>
+									
+									<c:if test="${flag == false}">
+											<form:checkbox path="roles" value="${role.id}"
+												label="${role.role}" />
+									</c:if>
 								</c:forEach>
+								
+								
 							</div>
 							<form:errors path="roles" class="help-block"></form:errors>
 						</div>
@@ -183,7 +196,7 @@
 					</spring:bind>
 				</div>
 			</div>
-			<div class="row hide" >
+			<div class="row hide">
 				<div class="col-lg-10">
 					<spring:bind path="password">
 						<div class="form-group ${status.error ? 'has-error' : ''}">

@@ -77,7 +77,7 @@ public class Employee {
 	private String rePassword;
 
 	@NotEmpty
-	@ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.MERGE)
+	@ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.PERSIST)
 	@JoinTable(name = "Employee_Role", joinColumns = { @JoinColumn(name = "employee_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
 	private Set<Role> roles = new HashSet<Role>();
 

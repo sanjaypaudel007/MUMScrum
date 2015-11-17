@@ -2,6 +2,7 @@ package edu.mum.mumscrum.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -161,7 +162,8 @@ public class EmployeeController {
 	@RequestMapping(value = "/edit/{employeeId}", method = RequestMethod.GET)
 	public String editEmployee(@PathVariable int employeeId, ModelMap model) {
 		Employee employee = employeeService.getEmployee(employeeId);
-		List<Role> roleList = roleService.getAllList();
+		List<Role> roleLists = roleService.getAllList();
+		Set<Role> roleList = new HashSet<Role>(roleLists);
 		model.addAttribute(employee);
 		model.addAttribute("roleList", roleList);		
 		return "employee/edit";
