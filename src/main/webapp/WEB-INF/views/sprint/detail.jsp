@@ -58,7 +58,11 @@
 										      <td>${item.priority }</td>
 										      <td align="right">
 										      <a href="<spring:url value="/userstory/detail/${item.id}" />" title="Detail"><i class="fa fa-eye fa-fw"></i></a>
-										      <a title="Remove from Sprint" onclick="return confirm('Are you sure to remove User Story from Sprint?');" href="<spring:url value="/sprint/${sprint.id}/removeus/${item.id}" />"><i class="fa  fa-remove fa-fw"></i></a>									      	
+										      <security:authorize access="hasRole('SCRUM_MASTER')">
+										      	<c:if test="${item.status == 'IN_PROGRESS'}">
+											      	<a title="Remove from Sprint" onclick="return confirm('Are you sure to remove User Story from Sprint?');" href="<spring:url value="/sprint/${sprint.id}/removeus/${item.id}" />"><i class="fa  fa-remove fa-fw"></i></a>
+											    </c:if>
+										      </security:authorize>									      	
 										      </td>										   
 										    </tr>										    
 										    </c:forEach>
@@ -71,7 +75,11 @@
 										      <td>${item.priority }</td>
 										      <td align="right">
 										      <a href="<spring:url value="/userstory/detail/${item.id}" />" title="Detail"><i class="fa fa-eye fa-fw"></i></a>
-										      	<a href="<spring:url value="/sprint/${sprint.id}/addus/${item.id}" />" title="Add to Sprint"><i class="fa fa-plus fa-fw"></i></a>								      	
+										      	<security:authorize access="hasRole('SCRUM_MASTER')">
+										      		<c:if test="${item.status == 'ESTIMATED'}">
+										      			<a href="<spring:url value="/sprint/${sprint.id}/addus/${item.id}" />" title="Add to Sprint"><i class="fa fa-plus fa-fw"></i></a>
+										      		</c:if>
+										      	</security:authorize>								      	
 										      	</td>
 										   
 										    </tr>

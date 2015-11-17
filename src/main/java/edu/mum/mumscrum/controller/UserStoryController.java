@@ -49,6 +49,7 @@ public class UserStoryController {
 		String loggedInUsername = request.getUserPrincipal().getName();
 		List<UserStory> list = userStoryService.getAllListFor(loggedInUsername);
 		model.addAttribute("list", list);
+		model.addAttribute("username", loggedInUsername);
 		return "userstory/list";
 	}
 

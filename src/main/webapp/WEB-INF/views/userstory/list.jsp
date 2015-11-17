@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 	<div>
 		<h4>&nbsp;</h4>
 	</div>
@@ -30,9 +30,19 @@
 										      <td>${item.priority}</td>
 										      <td>${item.sprint.name}</td>
 										      <td align="right">
+										      <security:authorize access="hasRole('SCRUM_MASTER')">
 										      	<a href="<spring:url value="/userstory/edit/${item.id}" />" title="Edit"><i class="fa fa-edit fa-fw"></i></a>
+										      </security:authorize>
+										      
+										      <security:authorize access="hasAnyRole('SCRUM_MASTER', 'DEVELOPER', 'TESTER')">
 										      	<a href="<spring:url value="/userstory/detail/${item.id}" />" title="Detail"><i class="fa fa-eye fa-fw"></i></a>
-										      	<a href="<spring:url value="/userstory/estimate/${item.id}" />" title="Estimate"><i class="fa fa-clock-o fa-fw"></i></a>
+										      </security:authorize>
+										      
+										      <security:authorize access="hasAnyRole('DEVELOPER', 'TESTER')">
+										      	<c:if test="${item.developer.username == username || item.tester.username == username}">
+										      		<a href="<spring:url value="/userstory/estimate/${item.id}" />" title="Estimate"><i class="fa fa-clock-o fa-fw"></i></a>
+										      	</c:if>
+										      </security:authorize>
 										    </tr>
 										    </c:forEach>
                                         
