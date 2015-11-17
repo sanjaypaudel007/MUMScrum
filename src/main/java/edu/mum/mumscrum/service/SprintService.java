@@ -31,4 +31,6 @@ public interface SprintService {
 	public List<UserStory> getSprintUserStoriesForUser(Long sprintId, String username);
 
 	public void updateEstimation(Sprint sprint, List<UserStory> userStories, String username);
+	
+	public void delete(Long id);
 }

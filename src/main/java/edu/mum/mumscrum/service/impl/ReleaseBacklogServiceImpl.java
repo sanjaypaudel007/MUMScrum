@@ -134,18 +134,18 @@ public class ReleaseBacklogServiceImpl implements ReleaseBacklogService {
 
 	@Override
 	@Transactional
-	//@PreAuthorize(value="hasRole('PRODUCT_OWNER')")
-	public void setScrumMaster(ReleaseBacklog changedReleaseBacklog, Integer scrumMasterId) {
-		ReleaseBacklog releaseBacklog = releaseBacklogRepository.findOne(changedReleaseBacklog.getId());
+	@PreAuthorize(value="hasRole('SCRUM_MASTER')")
+	public void startRelease(ReleaseBacklog rb) {
+		ReleaseBacklog releaseBacklog = releaseBacklogRepository.findOne(rb.getId());
 		if (releaseBacklog == null)
 			throw new ResponseStatusException("Requested release backlog doesn't exist");
-		Employee scrumMaster = employeeRepository.findOne(scrumMasterId);
-		if (scrumMaster == null)
-			throw new ResponseStatusException("Requested scrum master doesn't exist");
-		releaseBacklog.setScrumMaster(scrumMaster);
-		releaseBacklog.setStartDate(changedReleaseBacklog.getStartDate());
-		releaseBacklog.setDeadline(changedReleaseBacklog.getDeadline());
-		releaseBacklog.setStatus(Status.ASSIGNED);
+//		Employee scrumMaster = employeeRepository.findOne(scrumMasterId);
+//		if (scrumMaster == null)
+//			throw new ResponseStatusException("Requested scrum master doesn't exist");
+//		releaseBacklog.setScrumMaster(scrumMaster);
+//		releaseBacklog.setStartDate(changedReleaseBacklog.getStartDate());
+//		releaseBacklog.setDeadline(changedReleaseBacklog.getDeadline());
+		releaseBacklog.setStatus(Status.IN_PROGRESS);
 //		releaseBacklog.getProductBacklog().setStatus(Status.IN_PROGRESS);
 //		productBacklogRepository.save(releaseBacklog.getProductBacklog());
 		releaseBacklogRepository.save(releaseBacklog);

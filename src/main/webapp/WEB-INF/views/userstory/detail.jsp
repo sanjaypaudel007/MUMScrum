@@ -51,6 +51,7 @@
 				</dl>
 				<form:form modelAttribute="userStory">
 				<security:authorize access="hasRole('SCRUM_MASTER')">
+				<c:if test="${userStory.status == 'NEW'}">
 					<div class="panel-body">
 						<table class="table">
 							<thead>
@@ -99,6 +100,7 @@
 
 					<input type="submit" value="Save"
 						class="btn btn-outline btn-default btn-xs" />
+					</c:if>
 					</security:authorize>
 
 					<input type="button"

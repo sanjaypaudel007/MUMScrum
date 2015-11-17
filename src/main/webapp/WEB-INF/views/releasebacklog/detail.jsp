@@ -25,10 +25,12 @@
 				  <dt>Status: </dt><dd><c:out value="${releaseBacklog.status }"/></dd>
 				</dl>
 				<security:authorize access="hasRole('SCRUM_MASTER')"> 
-				<input type="button" onclick="document.location.href='<spring:url value="/releasebacklog/edit/${releaseBacklog.id}" />'" 
-					class="btn btn-outline btn-default btn-xs" value=" Edit ">
-				<input type="button" onclick="document.location.href='<spring:url value="/releasebacklog/startwork/${releaseBacklog.id}" />'" 
-					class="btn btn-outline btn-default btn-xs" value="Start Work">
+				<c:if test="${releaseBacklog.status == 'ASSIGNED'}">
+					<input type="button" onclick="document.location.href='<spring:url value="/releasebacklog/edit/${releaseBacklog.id}" />'" 
+						class="btn btn-outline btn-default btn-xs" value=" Edit ">
+					<input type="button" onclick="document.location.href='<spring:url value="/releasebacklog/startwork/${releaseBacklog.id}" />'" 
+						class="btn btn-outline btn-default btn-xs" value="Start Work">
+				</c:if>
 				</security:authorize>
 				<input type="button" onclick="document.location.href='<spring:url value="/releasebacklog/list" />'" 
 					class="btn btn-outline btn-default btn-xs" value=" List ">
@@ -64,7 +66,9 @@
 										      <td align="right">										      
 											      <a href="<spring:url value="/userstory/detail/${item.id}" />" title="Detail"><i class="fa fa-eye fa-fw"></i></a>
 											       <security:authorize access="hasRole('SCRUM_MASTER')">
-											       		<a href="<spring:url value="/userstory/edit/${item.id}" />" title="Edit"><i class="fa fa-edit fa-fw"></i></a>
+											       		<c:if test="${item.status == 'NEW'}">
+											       			<a href="<spring:url value="/userstory/edit/${item.id}" />" title="Edit"><i class="fa fa-edit fa-fw"></i></a>
+											       		</c:if>
 											       		<a title="Delete" onclick="return false;" data-action="delete-toggle" data-target="row-${count.count}" href="<spring:url value="/userstory/delete/${item.id}" />"><i class="fa  fa-trash-o fa-fw"></i></a>
 											      </security:authorize>
 										      </td>										   
@@ -107,7 +111,9 @@
 										      <td align="right">
 										      <a href="<spring:url value="/sprint/detail/${item.id}" />" title="Detail"><i class="fa fa-eye fa-fw"></i></a>
 										      			 <security:authorize access="hasRole('SCRUM_MASTER')">
+										      	<c:if test="${item.status == 'NEW'}">
 										      	<a href="<spring:url value="/sprint/edit/${item.id}" />" title="Edit"><i class="fa fa-edit fa-fw"></i></a>
+										      	</c:if>
 										      	
 										      	<a title="Delete" onclick="return false;" data-action="delete-toggle" data-target="row-${count.count}"
 										      	href="<spring:url value="/sprint/delete/${item.id}" />"><i class="fa  fa-trash-o fa-fw"></i></a>

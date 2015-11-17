@@ -27,7 +27,7 @@ public interface ReleaseBacklogService {
 	
 	public Object getUserStoriesNotAddedToSprint(ReleaseBacklog releaseBacklog);
 
-	public void setScrumMaster(ReleaseBacklog changedReleaseBacklog, Integer scrumMasterId);
+	public void startRelease(ReleaseBacklog rb);
 	
 	public void delete(Long id);
 }

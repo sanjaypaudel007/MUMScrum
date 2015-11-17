@@ -142,19 +142,19 @@ public class SprintServiceImpl implements SprintService {
 	@PreAuthorize(value = "hasRole('SCRUM_MASTER')")
 	public void startSprint(Sprint s) {
 		Sprint sprint = sprintRepository.findOne(s.getId());
-		sprint.setStartDate(s.getStartDate());
-		sprint.setEndDate(s.getEndDate());
+//		sprint.setStartDate(s.getStartDate());
+//		sprint.setEndDate(s.getEndDate());
 		sprint.setStatus(Status.IN_PROGRESS);
 		sprintRepository.save(sprint);
-		for(UserStory us: s.getUserStories()){
-			UserStory userStory = userStoryRepository.findOne(us.getId());
-			Employee developer = employeeRepository.findOne(us.getDeveloper().getId());
-			userStory.setDeveloper(developer);
-			Employee tester = employeeRepository.findOne(us.getTester().getId());
-			userStory.setTester(tester);
-			userStory.setStatus(Status.ASSIGNED);
-			userStoryRepository.save(userStory);
-		}
+//		for(UserStory us: s.getUserStories()){
+//			UserStory userStory = userStoryRepository.findOne(us.getId());
+//			Employee developer = employeeRepository.findOne(us.getDeveloper().getId());
+//			userStory.setDeveloper(developer);
+//			Employee tester = employeeRepository.findOne(us.getTester().getId());
+//			userStory.setTester(tester);
+//			userStory.setStatus(Status.ASSIGNED);
+//			userStoryRepository.save(userStory);
+//		}
 	}
 
 	@Override
@@ -194,5 +194,12 @@ public class SprintServiceImpl implements SprintService {
 			wl.setDate(sprint.getStartDate());
 			workLogRepository.save(wl);
 		}
+	}
+	
+	@Override
+	@PreAuthorize(value = "hasRole('SCRUM_MASTER')")
+	public void delete(Long id) {
+		// TODO Auto-generated method stub
+		sprintRepository.delete(id);
 	}
 }

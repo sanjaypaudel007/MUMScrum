@@ -23,8 +23,10 @@
 				   <dt>Status:</dt><dd><c:out value="${sprint.status }"></c:out></dd>
 				</dl>
 				<security:authorize access="hasRole('SCRUM_MASTER')"> 
-					<input type="button" onclick="document.location.href='<spring:url value="/sprint/edit/${sprint.id}" />'" class="btn btn-outline btn-default btn-xs" value=" Edit ">
-					<input type="button" onclick="document.location.href='<spring:url value="/sprint/startwork/${sprint.id}" />'" class="btn btn-outline btn-default btn-xs" value="Start Work">
+					<c:if test="${sprint.status == 'NEW'}">
+						<input type="button" onclick="document.location.href='<spring:url value="/sprint/edit/${sprint.id}" />'" class="btn btn-outline btn-default btn-xs" value=" Edit ">
+						<input type="button" onclick="document.location.href='<spring:url value="/sprint/startwork/${sprint.id}" />'" class="btn btn-outline btn-default btn-xs" value="Start Work">
+					</c:if>
 				</security:authorize>
 
 				<input type="button" onclick="document.location.href='<spring:url value="/sprint/list" />'" class="btn btn-outline btn-default btn-xs" value=" List ">
@@ -59,7 +61,7 @@
 										      <td align="right">
 										      <a href="<spring:url value="/userstory/detail/${item.id}" />" title="Detail"><i class="fa fa-eye fa-fw"></i></a>
 										      <security:authorize access="hasRole('SCRUM_MASTER')">
-										      	<c:if test="${item.status == 'IN_PROGRESS'}">
+										      	<c:if test="${item.status == 'IN_PROGRESS' && sprint.status == 'NEW'}">
 											      	<a title="Remove from Sprint" onclick="return confirm('Are you sure to remove User Story from Sprint?');" href="<spring:url value="/sprint/${sprint.id}/removeus/${item.id}" />"><i class="fa  fa-remove fa-fw"></i></a>
 											    </c:if>
 										      </security:authorize>									      	
@@ -76,7 +78,7 @@
 										      <td align="right">
 										      <a href="<spring:url value="/userstory/detail/${item.id}" />" title="Detail"><i class="fa fa-eye fa-fw"></i></a>
 										      	<security:authorize access="hasRole('SCRUM_MASTER')">
-										      		<c:if test="${item.status == 'ESTIMATED'}">
+										      		<c:if test="${item.status == 'ESTIMATED' && sprint.status == 'NEW'}">
 										      			<a href="<spring:url value="/sprint/${sprint.id}/addus/${item.id}" />" title="Add to Sprint"><i class="fa fa-plus fa-fw"></i></a>
 										      		</c:if>
 										      	</security:authorize>								      	

@@ -31,7 +31,10 @@
 										      <td>${item.sprint.name}</td>
 										      <td align="right">
 										      <security:authorize access="hasRole('SCRUM_MASTER')">
-										      	<a href="<spring:url value="/userstory/edit/${item.id}" />" title="Edit"><i class="fa fa-edit fa-fw"></i></a>
+										      	<c:if test="${item.status == 'NEW'}">
+										      		<a href="<spring:url value="/userstory/edit/${item.id}" />" title="Edit"><i class="fa fa-edit fa-fw"></i></a>
+										      	</c:if>
+										      	<a title="Delete" onclick="return false;" data-action="delete-toggle" data-target="row-${count.count}" href="<spring:url value="/userstory/delete/${item.id}" />"><i class="fa  fa-trash-o fa-fw"></i></a>
 										      </security:authorize>
 										      
 										      <security:authorize access="hasAnyRole('SCRUM_MASTER', 'DEVELOPER', 'TESTER')">
@@ -39,7 +42,7 @@
 										      </security:authorize>
 										      
 										      <security:authorize access="hasAnyRole('DEVELOPER', 'TESTER')">
-										      	<c:if test="${item.developer.username == username || item.tester.username == username}">
+										      	<c:if test="${(item.developer.username == username || item.tester.username == username) && item.status == 'ASSIGNED'}">
 										      		<a href="<spring:url value="/userstory/estimate/${item.id}" />" title="Estimate"><i class="fa fa-clock-o fa-fw"></i></a>
 										      	</c:if>
 										      </security:authorize>

@@ -114,31 +114,32 @@ public class ReleaseBacklogController {
 
 	}
 	
-	/*
+	
 	@RequestMapping(value = { "/startwork/{id}" }, method = RequestMethod.GET)
 	public String getStartWorkingForm(@PathVariable("id") Long releaseBacklogId, ModelMap model) {
 		logger.info("Editing release backlog with id " + releaseBacklogId);
-		ReleaseBacklog releaseBacklog = releaseBacklogService.getDetail(releaseBacklogId);
-		if (releaseBacklog == null)
-			throw new ResponseStatusException("Requested release backlog doesn't exist");
-		if(releaseBacklog.getScrumMaster() == null){
-			releaseBacklog.setScrumMaster(new Employee());
-		}
-		List<Employee> scrumMasters = employeeService.getScrumMasters();
-		model.addAttribute("scrumMasters", scrumMasters);
-		model.addAttribute("releaseBacklog", releaseBacklog);
+		ReleaseBacklog rb = releaseBacklogService.getDetail(releaseBacklogId);
+//		if (releaseBacklog == null)
+//			throw new ResponseStatusException("Requested release backlog doesn't exist");
+//		if(releaseBacklog.getScrumMaster() == null){
+//			releaseBacklog.setScrumMaster(new Employee());
+//		}
+//		List<Employee> scrumMasters = employeeService.getScrumMasters();
+//		model.addAttribute("scrumMasters", scrumMasters);
+//		model.addAttribute("releaseBacklog", releaseBacklog);
 		logger.info("Starting the release backlog.");
-		return "releasebacklog/startworking";		
+//		return "releasebacklog/startworking";		
+		releaseBacklogService.startRelease(rb);
+		return "redirect:/releasebacklog/detail/"+ releaseBacklogId;
 	}
 	
-	@RequestMapping(value = { "/startwork/{id}" }, method = RequestMethod.POST)
-	public String doStartWork(@PathVariable("id") Long releaseBacklogId, @ModelAttribute("releaseBacklog") ReleaseBacklog rb, ModelMap model) {
-		logger.info("Editing release backlog with id " + releaseBacklogId);		
-		Integer scrumMasterId = rb.getScrumMaster().getId();
-		releaseBacklogService.setScrumMaster(rb, scrumMasterId);
-		return "redirect:/releasebacklog/detail/"+ releaseBacklogId;		
-	}
-	*/
+//	@RequestMapping(value = { "/startwork/{id}" }, method = RequestMethod.POST)
+//	public String doStartWork(@PathVariable("id") Long releaseBacklogId, @ModelAttribute("releaseBacklog") ReleaseBacklog rb, ModelMap model) {
+//		logger.info("Editing release backlog with id " + releaseBacklogId);		
+//		Integer scrumMasterId = rb.getScrumMaster().getId();
+//		releaseBacklogService.startRelease(rb);
+//		return "redirect:/releasebacklog/detail/"+ releaseBacklogId;		
+//	}
 	
 	@RequestMapping(value="/detail/{id}")
 	public String getDetail(@PathVariable("id") Long releaseBacklogId, Model model){

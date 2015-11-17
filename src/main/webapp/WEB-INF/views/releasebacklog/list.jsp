@@ -43,7 +43,9 @@
 										      <td align="right">
 											      	<a href="<spring:url value="/releasebacklog/detail/${item.id}" />" title="Detail"><i class="fa fa-eye fa-fw"></i></a>
 										      	<security:authorize access="hasRole('SCRUM_MASTER')">
-											      	<a href="<spring:url value="/releasebacklog/edit/${item.id}" />" title="Edit"><i class="fa fa-edit fa-fw"></i></a>
+										      		<c:if test="${item.status == 'ASSIGNED'}">
+											      		<a href="<spring:url value="/releasebacklog/edit/${item.id}" />" title="Edit"><i class="fa fa-edit fa-fw"></i></a>
+											      	</c:if>
 											      	<a title="Delete" onclick="return false;" data-action="delete-toggle" data-target="row-${count.count}" href="<spring:url value="/releasebacklog/delete/${item.id}" />"><i class="fa  fa-trash-o fa-fw"></i></a>
 											    </security:authorize>
 										      </td>

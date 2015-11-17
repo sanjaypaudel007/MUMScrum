@@ -26,6 +26,7 @@ import edu.mum.mumscrum.entity.ReleaseBacklog;
 import edu.mum.mumscrum.entity.Sprint;
 import edu.mum.mumscrum.entity.UserStory;
 import edu.mum.mumscrum.response.EstimationModel;
+import edu.mum.mumscrum.response.Response;
 import edu.mum.mumscrum.response.ResponseStatusException;
 import edu.mum.mumscrum.service.EmployeeService;
 import edu.mum.mumscrum.service.ReleaseBacklogService;
@@ -142,45 +143,56 @@ public class SprintController {
 	public String getStartWorkingForm(@PathVariable("id") Long sprintId, ModelMap model) {
 		logger.info("Editing release backlog with id " + sprintId);
 		Sprint sprint = sprintService.getDetailWithUserStories(sprintId);
-		if (sprint == null)
-			throw new ResponseStatusException("Requested sprint doesn't exist");
-		for(UserStory us: sprint.getUserStories()){
-			if(us.getDeveloper() == null) us.setDeveloper(new Employee());
-			if(us.getTester() == null ) us.setTester(new Employee());
-		}
-		List<Employee> developers = employeeService.getAllDevelopers();
-		List<Employee> testers = employeeService.getAllTesters();
-		model.addAttribute("developers", developers);
-		model.addAttribute("testers", testers);
-		model.addAttribute("sprint", sprint);
-		logger.info("Starting the sprint.");
-		return "sprint/startworking";		
-	}
-	
-	@RequestMapping(value = { "/startwork/{id}" }, method = RequestMethod.POST)
-	public String doStartWork(@PathVariable("id") Long sprintId, @ModelAttribute("sprint") Sprint sprint, ModelMap model) {
-		logger.info("Editing release backlog with id " + sprintId);
 		sprintService.startSprint(sprint);
-		return "redirect:/sprint/detail/"+ sprintId;		
+		return "redirect:/sprint/detail/"+ sprintId;
+//		if (sprint == null)
+//			throw new ResponseStatusException("Requested sprint doesn't exist");
+//		for(UserStory us: sprint.getUserStories()){
+//			if(us.getDeveloper() == null) us.setDeveloper(new Employee());
+//			if(us.getTester() == null ) us.setTester(new Employee());
+//		}
+//		List<Employee> developers = employeeService.getAllDevelopers();
+//		List<Employee> testers = employeeService.getAllTesters();
+//		model.addAttribute("developers", developers);
+//		model.addAttribute("testers", testers);
+//		model.addAttribute("sprint", sprint);
+//		logger.info("Starting the sprint.");
+//		return "sprint/startworking";		
 	}
 	
-	@RequestMapping(value = "/estimate/{id}", method = RequestMethod.GET)
-	public String getEstimateForm(@PathVariable("id") Long sprintId, Model model, HttpServletRequest request){
-		String username = request.getUserPrincipal().getName();
-		Sprint sprint = sprintService.getDetail(sprintId);
-		List<UserStory> userStories = sprintService.getSprintUserStoriesForUser(sprintId, username);
-		EstimationModel eModel = new EstimationModel();
-		eModel.setSprint(sprint);
-		eModel.setUserStories(userStories);
-		model.addAttribute("model", eModel);
-		return "sprint/estimate";
-	}
-
-	@RequestMapping(value = "/estimate/{id}", method = RequestMethod.POST)
-	public String doEstimate(@PathVariable("id") Long sprintId, Model model, @ModelAttribute("model") EstimationModel eModel, HttpServletRequest request){
-		String username = request.getUserPrincipal().getName();
-		Sprint sprint = sprintService.getDetail(sprintId);
-		sprintService.updateEstimation(sprint, eModel.getUserStories(), username);
-		return "redirect:/sprint/";
+//	@RequestMapping(value = { "/startwork/{id}" }, method = RequestMethod.POST)
+//	public String doStartWork(@PathVariable("id") Long sprintId, @ModelAttribute("sprint") Sprint sprint, ModelMap model) {
+//		logger.info("Editing release backlog with id " + sprintId);
+//		sprintService.startSprint(sprint);
+//		return "redirect:/sprint/detail/"+ sprintId;		
+//	}
+	
+//	@RequestMapping(value = "/estimate/{id}", method = RequestMethod.GET)
+//	public String getEstimateForm(@PathVariable("id") Long sprintId, Model model, HttpServletRequest request){
+//		String username = request.getUserPrincipal().getName();
+//		Sprint sprint = sprintService.getDetail(sprintId);
+//		List<UserStory> userStories = sprintService.getSprintUserStoriesForUser(sprintId, username);
+//		EstimationModel eModel = new EstimationModel();
+//		eModel.setSprint(sprint);
+//		eModel.setUserStories(userStories);
+//		model.addAttribute("model", eModel);
+//		return "sprint/estimate";
+//	}
+//
+//	@RequestMapping(value = "/estimate/{id}", method = RequestMethod.POST)
+//	public String doEstimate(@PathVariable("id") Long sprintId, Model model, @ModelAttribute("model") EstimationModel eModel, HttpServletRequest request){
+//		String username = request.getUserPrincipal().getName();
+//		Sprint sprint = sprintService.getDetail(sprintId);
+//		sprintService.updateEstimation(sprint, eModel.getUserStories(), username);
+//		return "redirect:/sprint/";
+//	}
+	
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+	public @ResponseBody Response delete(@PathVariable long id, HttpServletRequest request) throws RuntimeException {
+		sprintService.delete(id);
+		Response response = new Response();
+		response.setMessage("Record successfully deleted.");
+		response.setSuccess(true);
+		return response;
 	}
 }
