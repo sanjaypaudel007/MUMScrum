@@ -9,7 +9,8 @@
 <html lang="en">
 
 <head>
-
+<!-- jQuery -->
+	<script src="<spring:url value="/resource/sb-admin/js/jquery.js" />"></script>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -66,9 +67,6 @@
 	</div>
 	<!-- /#wrapper -->
 
-
-	<!-- jQuery -->
-	<script src="<spring:url value="/resource/sb-admin/js/jquery.js" />"></script>
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="<spring:url value="/resource/sb-admin/js/bootstrap.min.js" />"></script>
