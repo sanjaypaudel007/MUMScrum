@@ -3,7 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <div class="row">
 	<div class="col-lg-12">
 		<h4 class="page-header">User Story Detail</h4>
@@ -50,6 +50,7 @@
 					</dd>
 				</dl>
 				<form:form modelAttribute="userStory">
+				<security:authorize access="hasRole('SCRUM_MASTER')">
 					<div class="panel-body">
 						<table class="table">
 							<thead>
@@ -98,6 +99,7 @@
 
 					<input type="submit" value="Save"
 						class="btn btn-outline btn-default btn-xs" />
+					</security:authorize>
 
 					<input type="button"
 						onclick="document.location.href='<spring:url value="/userstory/" />'"
