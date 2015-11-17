@@ -450,7 +450,9 @@ public class Employee {
 		return true;
 	}
 	
-	
+	public String getFullName(){
+		return this.lastName + ", " + this.firstName;
+	}	
 }
 
 
