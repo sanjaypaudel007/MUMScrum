@@ -42,7 +42,7 @@
 										      </security:authorize>
 										      
 										      <security:authorize access="hasAnyRole('DEVELOPER', 'TESTER')">
-										      	<c:if test="${(item.developer.username == username || item.tester.username == username) && item.status == 'ASSIGNED'}">
+										      	<c:if test="${(item.developer.username == username || item.tester.username == username) && (item.status == 'ASSIGNED' || item.status == 'ESTIMATED')}">
 										      		<a href="<spring:url value="/userstory/estimate/${item.id}" />" title="Estimate"><i class="fa fa-clock-o fa-fw"></i></a>
 										      	</c:if>
 										      </security:authorize>
