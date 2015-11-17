@@ -32,6 +32,7 @@
 										      <td align="right">
 										      	<a href="<spring:url value="/userstory/edit/${item.id}" />" title="Edit"><i class="fa fa-edit fa-fw"></i></a>
 										      	<a href="<spring:url value="/userstory/detail/${item.id}" />" title="Detail"><i class="fa fa-eye fa-fw"></i></a>
+										      	<a href="<spring:url value="/userstory/estimate/${item.id}" />" title="Estimate"><i class="fa fa-clock-o fa-fw"></i></a>
 										    </tr>
 										    </c:forEach>
                                         

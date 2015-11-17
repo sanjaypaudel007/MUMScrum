@@ -30,5 +30,7 @@ public interface WorkLogRepository extends CrudRepository<WorkLog, Long>{
 
 	@Query("SELECT w FROM WorkLog w WHERE estimatingPerson = :emp")
 	List<WorkLog> getAllFor(@Param("emp") Employee employee);
-
+	
+	@Query("SELECT w FROM WorkLog w WHERE userStory = :us")
+	List<WorkLog> findAll(@Param("us") UserStory userStory);
 }

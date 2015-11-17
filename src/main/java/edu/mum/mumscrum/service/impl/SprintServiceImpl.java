@@ -113,6 +113,8 @@ public class SprintServiceImpl implements SprintService {
 		}
 		sp.getUserStories().add(us);
 		us.setSprint(sp);
+		us.setStatus(Status.IN_PROGRESS);
+		updateEstimation(sp, us);
 		sprintRepository.save(sp);
 		
 	}
@@ -130,6 +132,7 @@ public class SprintServiceImpl implements SprintService {
 		}
 		sp.getUserStories().remove(us);
 		us.setSprint(null);
+		us.setStatus(Status.ESTIMATED);
 		sprintRepository.save(sp);
 		
 	}
@@ -185,6 +188,11 @@ public class SprintServiceImpl implements SprintService {
 		}
 	}
 	
-	
-
+	public void updateEstimation(Sprint sprint, UserStory userStory) {
+		Iterable<WorkLog> workLog = workLogRepository.findAll(userStory);
+		for (WorkLog wl : workLog) {
+			wl.setDate(sprint.getStartDate());
+			workLogRepository.save(wl);
+		}
+	}
 }

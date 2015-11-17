@@ -2,6 +2,7 @@ package edu.mum.mumscrum.service;
 
 import java.util.List;
 
+import edu.mum.mumscrum.entity.Sprint;
 import edu.mum.mumscrum.entity.UserStory;
 
 
@@ -22,4 +23,5 @@ public interface UserStoryService {
 
 	public void updateUserStory(UserStory userStory);
 
+	public void updateEstimation(UserStory userStory, String username);
 }

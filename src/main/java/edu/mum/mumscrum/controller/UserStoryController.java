@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.mum.mumscrum.entity.Employee;
 import edu.mum.mumscrum.entity.ReleaseBacklog;
+import edu.mum.mumscrum.entity.Sprint;
 import edu.mum.mumscrum.entity.UserStory;
 import edu.mum.mumscrum.enums.Status;
+import edu.mum.mumscrum.response.EstimationModel;
 import edu.mum.mumscrum.response.Response;
 import edu.mum.mumscrum.response.ResponseStatusException;
 import edu.mum.mumscrum.service.EmployeeService;
@@ -160,4 +162,18 @@ public class UserStoryController {
 		return "redirect:/userstory/list";
 	}
 
+	@RequestMapping(value = "/estimate/{id}", method = RequestMethod.GET)
+	public String getEstimateForm(@PathVariable("id") Long userStoryId, Model model, HttpServletRequest request){
+		String username = request.getUserPrincipal().getName();
+		UserStory userStory = userStoryService.getDetail(userStoryId);
+		model.addAttribute("userStory", userStory);
+		return "userstory/estimate";
+	}
+
+	@RequestMapping(value = "/estimate/{id}", method = RequestMethod.POST)
+	public String doEstimate(@PathVariable("id") Long userStoryId, Model model, @ModelAttribute("userStory") UserStory userStory, HttpServletRequest request){
+		String username = request.getUserPrincipal().getName();
+		userStoryService.updateEstimation(userStory, username);
+		return "redirect:/userstory/";
+	}
 }

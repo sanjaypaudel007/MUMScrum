@@ -150,4 +150,11 @@ public class ReleaseBacklogServiceImpl implements ReleaseBacklogService {
 //		productBacklogRepository.save(releaseBacklog.getProductBacklog());
 		releaseBacklogRepository.save(releaseBacklog);
 	}
+	
+	@Override
+	@PreAuthorize(value = "hasRole('SCRUM_MASTER')")
+	public void delete(Long id) {
+		// TODO Auto-generated method stub
+		releaseBacklogRepository.delete(id);
+	}
 }

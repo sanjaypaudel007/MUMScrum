@@ -8,11 +8,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.mumscrum.entity.Employee;
+import edu.mum.mumscrum.entity.Sprint;
 import edu.mum.mumscrum.entity.UserStory;
+import edu.mum.mumscrum.entity.WorkLog;
 import edu.mum.mumscrum.enums.Status;
 import edu.mum.mumscrum.repository.EmployeeRepository;
 import edu.mum.mumscrum.repository.ReleaseBacklogRepository;
 import edu.mum.mumscrum.repository.UserStoryRepository;
+import edu.mum.mumscrum.repository.WorkLogRepository;
 import edu.mum.mumscrum.service.UserStoryService;
 
 @Service
@@ -26,6 +29,9 @@ public class UserStoryServiceImpl implements UserStoryService {
 	
 	@Autowired
 	EmployeeRepository employeeRepository;
+	
+	@Autowired
+	WorkLogRepository worklogRepository;
 
 //	@Override
 //	public List<UserStory> getUserStoryFor(Long releaseBacklogId) {
@@ -84,4 +90,26 @@ public class UserStoryServiceImpl implements UserStoryService {
 		
 	}
 
+	@Override
+	@Transactional
+	public void updateEstimation(UserStory us, String username) {
+		Employee user = employeeRepository.getEmployeeByUsername(username);
+		UserStory userStory = userStoryRepository.findOne(us.getId());
+		userStory.setStatus(Status.ESTIMATED);
+		WorkLog wl = new WorkLog();
+		wl.setEstimatingPerson(user);
+		
+		if (userStory.getDeveloper().getId() == user.getId()) {
+			userStory.setDevelopmentEstimate(us.getDevelopmentEstimate());
+			wl.setRemainingWorkEstimation(us.getDevelopmentEstimate());
+		} else {
+			userStory.setTestingEstimate(us.getTestingEstimate());
+			wl.setRemainingWorkEstimation(us.getTestingEstimate());
+		}
+
+		wl.setUserStory(userStory);
+		worklogRepository.deleteExistingWorklog(wl.getUserStory(), wl.getEstimatingPerson(), wl.getDate());
+		worklogRepository.save(wl);
+		userStoryRepository.save(userStory);
+	}
 }

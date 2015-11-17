@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.mum.mumscrum.entity.Employee;
-import edu.mum.mumscrum.entity.Pair;
 import edu.mum.mumscrum.entity.ReleaseBacklog;
 import edu.mum.mumscrum.enums.Status;
+import edu.mum.mumscrum.response.Response;
 import edu.mum.mumscrum.response.ResponseStatusException;
 import edu.mum.mumscrum.service.EmployeeService;
 import edu.mum.mumscrum.service.ReleaseBacklogService;
@@ -148,6 +148,15 @@ public class ReleaseBacklogController {
 //		model.addAttribute("notAddedUserStories", productBacklogService.getUserStoriesNotAddedToReleaseBacklog(rb.getProductBacklog()));
 		model.addAttribute("sprints", sprintService.getSprintFor(releaseBacklogId));
 		return "releasebacklog/detail";
+	}
+	
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+	public @ResponseBody Response delete(@PathVariable long id, HttpServletRequest request) throws RuntimeException {
+		releaseBacklogService.delete(id);
+		Response response = new Response();
+		response.setMessage("Record successfully deleted.");
+		response.setSuccess(true);
+		return response;
 	}
 	
 	/*
