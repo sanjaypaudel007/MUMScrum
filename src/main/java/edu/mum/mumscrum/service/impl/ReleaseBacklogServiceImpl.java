@@ -30,9 +30,9 @@ public class ReleaseBacklogServiceImpl implements ReleaseBacklogService {
 
 	@Override
 	public void add(ReleaseBacklog releaseBacklog) {
-		//ProductBacklog pb = productBacklogRepository.findOne(productBacklogId);
-		//releaseBacklog.setProductBacklog(pb);
-		releaseBacklog.setStatus(Status.NEW);
+//		ProductBacklog pb = productBacklogRepository.findOne(productBacklogId);
+//		releaseBacklog.setProductBacklog(pb);
+//		releaseBacklog.setStatus(Status.NEW);
 		releaseBacklogRepository.save(releaseBacklog);
 	}
 

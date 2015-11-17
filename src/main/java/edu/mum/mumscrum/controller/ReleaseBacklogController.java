@@ -18,7 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import edu.mum.mumscrum.entity.Employee;
+import edu.mum.mumscrum.entity.Pair;
 import edu.mum.mumscrum.entity.ReleaseBacklog;
+import edu.mum.mumscrum.enums.Status;
+import edu.mum.mumscrum.response.ResponseStatusException;
 import edu.mum.mumscrum.service.EmployeeService;
 import edu.mum.mumscrum.service.ReleaseBacklogService;
 import edu.mum.mumscrum.service.SprintService;
@@ -30,6 +34,9 @@ public class ReleaseBacklogController {
 	@Autowired
 	ReleaseBacklogService releaseBacklogService;
 	
+
+//	@Autowired
+//	ProductBacklogService productBacklogService;
 	
 	@Autowired
 	SprintService sprintService;
@@ -49,34 +56,34 @@ public class ReleaseBacklogController {
 		return list;
 	}
 	
-	@RequestMapping(value="/add{rb_id}", method= RequestMethod.GET)
-	public String getFormForAddReleaseBacklog(@PathVariable("rb_id") Long releaseBacklog, Model model){
-	//public String getFormForAddReleaseBacklog(@ModelAttribute ("releaseBacklog") ReleaseBacklog rb, Model model){
-		//ProductBacklog pb = productBacklogService.getDetail(productBacklog);
-		ReleaseBacklog rb =  releaseBacklogService.getDetail(releaseBacklog);
-		//rb.setProductBacklog(pb);
+	@RequestMapping(value="/add", method= RequestMethod.GET)
+	public String getFormForAddReleaseBacklog(Model model, HttpServletRequest request){
+//		ProductBacklog pb = productBacklogService.getDetail(productBacklog);
+		ReleaseBacklog rb = new ReleaseBacklog();
+//		rb.setProductBacklog(pb);
 		model.addAttribute("releaseBacklog", rb);
 		model.addAttribute("buttonName", "Save");
 		model.addAttribute("title", "Add");
 		return "releasebacklog/add";
 	}
 	
-	
-	@RequestMapping(value="/add{rb_id}", method= RequestMethod.POST)
-	//public String addReleaseBacklog(@PathVariable("rb_id") Long productBacklog,
-	public String addReleaseBacklog(@ModelAttribute("releaseBacklog") @Valid ReleaseBacklog releaseBacklog, 
-			BindingResult br, Model model){
+	@RequestMapping(value="/add", method= RequestMethod.POST)
+	public String addReleaseBacklog(@ModelAttribute("releaseBacklog") @Valid ReleaseBacklog releaseBacklog, BindingResult br, Model model, HttpServletRequest request){
 		if(br.hasErrors()){
 			model.addAttribute("buttonName", "Save");
 			model.addAttribute("title", "Add");
 			return "releasebacklog/add";
 		}
 		logger.info("Adding new release");
+
+		Employee scrumMaster = new Employee();
+		scrumMaster.setId((int) request.getSession().getAttribute("loginId"));
+		releaseBacklog.setScrumMaster(scrumMaster);
+		releaseBacklog.setStatus(Status.ASSIGNED);
 		releaseBacklogService.add(releaseBacklog);
-		return "redirect:/releasebacklog/list" ;
+		return "redirect:/releasebacklog/detail/" + releaseBacklog.getId();
 	}
 	
-	/*
 	@RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.GET)
 	public String edit(@PathVariable("id") Long releaseBacklogId, ModelMap model) {
 		logger.info("Editing release backlog with id " + releaseBacklogId);
@@ -107,6 +114,7 @@ public class ReleaseBacklogController {
 
 	}
 	
+	/*
 	@RequestMapping(value = { "/startwork/{id}" }, method = RequestMethod.GET)
 	public String getStartWorkingForm(@PathVariable("id") Long releaseBacklogId, ModelMap model) {
 		logger.info("Editing release backlog with id " + releaseBacklogId);
@@ -130,17 +138,19 @@ public class ReleaseBacklogController {
 		releaseBacklogService.setScrumMaster(rb, scrumMasterId);
 		return "redirect:/releasebacklog/detail/"+ releaseBacklogId;		
 	}
+	*/
 	
 	@RequestMapping(value="/detail/{id}")
 	public String getDetail(@PathVariable("id") Long releaseBacklogId, Model model){
 		ReleaseBacklog rb = releaseBacklogService.getDetailWithUserStories(releaseBacklogId);
 		model.addAttribute("releaseBacklog", rb);
 		model.addAttribute("addedUserStories", rb.getUserStories());
-		model.addAttribute("notAddedUserStories", productBacklogService.getUserStoriesNotAddedToReleaseBacklog(rb.getProductBacklog()));
+//		model.addAttribute("notAddedUserStories", productBacklogService.getUserStoriesNotAddedToReleaseBacklog(rb.getProductBacklog()));
 		model.addAttribute("sprints", sprintService.getSprintFor(releaseBacklogId));
 		return "releasebacklog/detail";
 	}
 	
+	/*
 	@RequestMapping(value = "/optionlist/{id}", method = RequestMethod.GET)
 	// @ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public @ResponseBody List< Pair<Integer, String> > optionList(@PathVariable long id, HttpServletRequest request) throws RuntimeException {

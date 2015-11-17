@@ -10,7 +10,7 @@ import edu.mum.mumscrum.entity.UserStory;
 public interface UserStoryService {
 	//public List<UserStory> getUserStoryFor(Long releaseBacklogId);
 
-//	public void add(UserStory userStory, Long releaseBacklogId);
+	public void add(UserStory userStory);
 
 	public UserStory getDetail(long userStoryId);
 

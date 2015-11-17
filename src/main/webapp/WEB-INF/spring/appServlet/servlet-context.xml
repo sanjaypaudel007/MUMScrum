@@ -43,4 +43,14 @@
 	</beans:bean>
 	<!-- tiles ends -->
 	
+	<interceptors>
+ 		<beans:bean class= "org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<beans:property name="paramName" value="language"/>
+	 	</beans:bean>	 	
+	 	<interceptor>
+        	<mapping path="/**"/>
+        	<beans:bean class="edu.mum.mumscrum.interceptor.SecurityInterceptor" />
+    	</interceptor>
+ 	</interceptors>
+	
 </beans:beans>

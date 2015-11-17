@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import edu.mum.mumscrum.entity.ReleaseBacklog;
 import edu.mum.mumscrum.entity.UserStory;
+import edu.mum.mumscrum.enums.Status;
 import edu.mum.mumscrum.response.Response;
 import edu.mum.mumscrum.response.ResponseStatusException;
 import edu.mum.mumscrum.service.ReleaseBacklogService;
@@ -45,54 +47,43 @@ public class UserStoryController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String getFormForAddUserStory(
-			@RequestParam(value = "productbacklog", required = false, defaultValue = "0") Long productBacklogId,
+			@RequestParam(value = "releasebacklog", required = false, defaultValue = "0") Long releaseBacklogId,
 			Model model) {
-//
-//		ProductBacklog productBacklog = productBacklogService.getDetail(productBacklogId);
-//
-//		List<ProductBacklog> listProductBackLog = productBacklogService.getAllList();
-//		List<ReleaseBacklog> listReleaseBackLog = releaseBacklogService.getReleaseBacklogFor(productBacklogId);
-//
-//		UserStory userStory = new UserStory();
-//		userStory.setProductBacklog(productBacklog);
-//		userStory.setDevelopmentEstimate(0.0);
-//		userStory.setTestingEstimate(0.0);
-//
-//		model.addAttribute("listProductBackLog", listProductBackLog);
-//		model.addAttribute("listReleaseBackLog", listReleaseBackLog);
-//		model.addAttribute("userStory", userStory);
-//		model.addAttribute("buttonName", "Save");
-//		model.addAttribute("title", "Add");
+
+		ReleaseBacklog releasebacklog = releaseBacklogService.getDetail(releaseBacklogId);
+		List<ReleaseBacklog> listReleaseBackLog = releaseBacklogService.getAllList();
+
+		UserStory userStory = new UserStory();
+		userStory.setDevelopmentEstimate(0.0);
+		userStory.setTestingEstimate(0.0);
+
+		model.addAttribute("listReleaseBackLog", listReleaseBackLog);
+		model.addAttribute("releasebacklog", releasebacklog);
+		model.addAttribute("userStory", userStory);
+		model.addAttribute("buttonName", "Save");
+		model.addAttribute("title", "Add");
 		return "userstory/add";
-//
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addUserStory(@ModelAttribute("userStory") @Valid UserStory userStory, BindingResult br,
-			@RequestParam(value = "productbacklog", required = false, defaultValue = "0") Long productBacklogId,
+			@RequestParam(value = "releasebacklog", required = false, defaultValue = "0") Long releaseBacklogId,
 			Model model) {
 
-//		productBacklogId = userStory.getProductBacklog().getId();
-//		ProductBacklog productBacklog = productBacklogService.getDetail(productBacklogId);
-//
-//		List<ProductBacklog> listProductBackLog = productBacklogService.getAllList();
-//		List<ReleaseBacklog> listReleaseBackLog = releaseBacklogService.getReleaseBacklogFor(productBacklogId);
-//
-//		userStory.setProductBacklog(productBacklog);
-//		userStory.setStatus(Status.NEW);
-//
-//		model.addAttribute("listProductBackLog", listProductBackLog);
-//		model.addAttribute("listReleaseBackLog", listReleaseBackLog);
-//		logger.error(br.getAllErrors());
-//		if (br.hasErrors()) {
-//			model.addAttribute("buttonName", "Save");
-//			model.addAttribute("title", "Add");
-//			//model.addAttribute("userStory", userStory);
+		ReleaseBacklog rb = releaseBacklogService.getDetail(releaseBacklogId);
+		userStory.setStatus(Status.NEW);
+		userStory.setReleaseBacklog(rb);
+
+		logger.error(br.getAllErrors());
+		if (br.hasErrors()) {
+			model.addAttribute("buttonName", "Save");
+			model.addAttribute("title", "Add");
+			//model.addAttribute("userStory", userStory);
 			return "userstory/add";
-//		}
-//		logger.info("Adding new release");
-//		userStoryService.add(userStory, productBacklogId);
-//		return "redirect:/productbacklog/detail/" + userStory.getProductBacklog().getId();
+		}
+		logger.info("Adding new release");
+		userStoryService.add(userStory);
+		return "redirect:/releasebacklog/detail/" + userStory.getReleaseBacklog().getId();
 	}
 
 	@RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.GET)
@@ -117,14 +108,14 @@ public class UserStoryController {
 	public String update(@PathVariable int id, @Valid @ModelAttribute UserStory userStory, BindingResult result,
 			ModelMap model) {
 
-//		model.addAttribute("buttonName", "Update");
-//		model.addAttribute("title", "Edit");
-//		if (result.hasErrors()) {
-//			return "userstory/add";
-//		}
-//		userStoryService.edit(userStory.getId(), userStory.getName(), userStory.getDescription(),
-//				userStory.getDevelopmentEstimate());
-		return "redirect:/productbacklog/detail/" + userStory.getId();
+		model.addAttribute("buttonName", "Update");
+		model.addAttribute("title", "Edit");
+		if (result.hasErrors()) {
+			return "userstory/add";
+		}
+		userStoryService.edit(userStory.getId(), userStory.getName(), userStory.getDescription(),
+				userStory.getDevelopmentEstimate());
+		return "redirect:/userstory/detail/" + userStory.getId();
 
 	}
 

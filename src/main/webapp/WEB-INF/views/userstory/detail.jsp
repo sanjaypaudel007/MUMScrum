@@ -25,6 +25,8 @@
 				</dl>
 				<input type="button" onclick="document.location.href='<spring:url value="/userstory/edit/${userStory.id}" />'" 
 					class="btn btn-outline btn-default btn-xs" value=" Edit ">
+				<input type="button" onclick="document.location.href='<spring:url value="/userstory/" />'" 
+					class="btn btn-outline btn-default btn-xs" value=" Cancel ">
   
 			</div>
 		</div>

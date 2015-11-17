@@ -14,6 +14,9 @@ import edu.mum.mumscrum.service.UserStoryService;
 
 @Service
 public class UserStoryServiceImpl implements UserStoryService {
+	
+	@Autowired
+	ReleaseBacklogRepository releaseBacklogRepository;
 
 	@Autowired
 	UserStoryRepository userStoryRepository;
@@ -25,12 +28,11 @@ public class UserStoryServiceImpl implements UserStoryService {
 //		return list;
 //	}
 
-//	@Override
-//	public void add(UserStory userStory, Long releaseBacklogId) {
-//		ReleaseBacklog rb = ReleaseBacklogRepository.findOne(releaseBacklogId);
-//		userStoryRepository.save(userStory);
-//
-//	}
+	@Override
+	public void add(UserStory userStory) {
+		userStoryRepository.save(userStory);
+
+	}
 
 	@Override
 	public UserStory getDetail(long userStoryId) {
