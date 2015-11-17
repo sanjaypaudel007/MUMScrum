@@ -24,7 +24,7 @@
 	
 		<div class="row">
            <div class="col-lg-6">
-        	   <spring:bind path="productBacklog.id">
+        	   <%-- <spring:bind path="productBacklog.id">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
 						<label class="control-label">Product Backlog: </label>
 						<form:select id="productBacklog" name="productBacklog.id" path="productBacklog.id" 
@@ -36,7 +36,7 @@
 						</form:select>
 					    <form:errors path="productBacklog.id" class="help-block"></form:errors>
 					</div>
-				</spring:bind>
+				</spring:bind> --%>
 				<!--<spring:bind path="releaseBacklog.id">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
 						<label class="control-label">Release Backlog: </label>
@@ -69,7 +69,7 @@
         	</div>
         </div>
 		<input class="btn btn-primary" type="submit" value="${buttonName}"/>
-		<input type="button" onclick="document.location.href='<spring:url value="/productbacklog" />'" 
+		<input type="button" onclick="document.location.href='<spring:url value="/userstory" />'" 
 		class="btn btn-warning" value=" Cancel ">
     
 	</form:form>

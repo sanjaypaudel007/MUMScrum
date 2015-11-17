@@ -24,4 +24,8 @@ public interface EmployeeService {
 	public boolean checkUsername(String username, int employeeId);
 
 	public String encryptPass(String password);
+
+	public List<Employee> getAllDevelopers();
+
+	public List<Employee> getAllTesters();
 }

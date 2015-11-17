@@ -19,7 +19,7 @@
 <link rel="icon" type="image/png"
 	href="<spring:url value="/resource/images/favicon.png" />" />
 
-<title>MUM Scrum Login - 4S</title>
+<title><spring:message code="mainPage.title" /></title>
 
 <!-- Bootstrap Core CSS -->
 <link

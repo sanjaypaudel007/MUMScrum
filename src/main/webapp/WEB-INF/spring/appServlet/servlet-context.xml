@@ -43,4 +43,19 @@
 	</beans:bean>
 	<!-- tiles ends -->
 	
+	<!-- For outsourcing validation messages -->
+	<beans:bean id= "messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+   		<beans:property name="basenames" value="messages,errorMessages"/> 
+	</beans:bean>
+	
+	<interceptors>
+ 		<beans:bean class= "org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<beans:property name="paramName" value="language"/>
+	 	</beans:bean>	 	
+	 	<interceptor>
+        	<mapping path="/**"/>
+        	<beans:bean class="edu.mum.mumscrum.interceptor.SecurityInterceptor" />
+    	</interceptor>
+ 	</interceptors>
+	
 </beans:beans>

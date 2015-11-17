@@ -9,14 +9,15 @@
 <html lang="en">
 
 <head>
-
+<!-- jQuery -->
+	<script src="<spring:url value="/resource/sb-admin/js/jquery.js" />"></script>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>MUM Scrum - 4S</title>
+<title><spring:message code="basePage.title" /></title>
 
 <!-- Bootstrap Core CSS -->
 <link href="<spring:url value="/resource/sb-admin/css/bootstrap.min.css" />" rel="stylesheet">
@@ -69,11 +70,6 @@
 	</div>
 	<!-- /#wrapper -->
 
-
-	<!-- jQuery -->
-	<script src="<spring:url value="/resource/sb-admin/js/jquery.js" />"></script>
-	
-	
 	<!-- Custom jQuery -->
 	<script src="<spring:url value="/resource/custom/js/custom.js" />"></script>
 

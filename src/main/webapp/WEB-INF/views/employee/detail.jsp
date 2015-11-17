@@ -15,13 +15,19 @@
 			<div>Detail</div>
 			<div>
 				<dl>
-				  <dt>Name: </dt><dd><c:out value="${employee.fullName}"></c:out></dd>
+				  <dt>Name: </dt><dd><c:out value="${employee.firstName}"></c:out> 
+				  <c:out value="${employee.lastName}"></c:out></dd>
 				  <dt>Address: </dt><dd><c:out value="${employee.address}"></c:out></dd>
 				  <dt>Phone: </dt><dd><c:out value="${employee.phone}"></c:out></dd>
 				  <dt>Email: </dt><dd><c:out value="${employee.email}"></c:out></dd>
 				  <dt>Date Of Birth: </dt><dd><c:out value="${employee.dob}"></c:out></dd>
 				  <dt>Image: </dt><dd><img src="<spring:url value="/resource/employeeImages/${employee.imageUrl}" />" width="90px"/></dd>
-				  <%-- <dt>Role: </dt><dd><c:out value="${employee.roles.role}"></c:out><br/> </dd> --%>
+				  <dt>Role: </dt>
+				  <c:forEach items="${employee.roles}" var="role">
+
+									
+										<c:out value="${role.role }" /> / 
+								</c:forEach>
 				</dl>
 			
 				<input type="button" onclick="document.location.href='<spring:url value="/employee" />'" 
