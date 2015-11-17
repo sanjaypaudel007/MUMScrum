@@ -13,57 +13,6 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">Chart</div>
 			<div class="panel-body">
-				<% /*<div class="table-responsive table-bordered">
-					<table class="table">
-						<thead>
-							<tr>
-								<th width="5%">#</th>
-								<th>Date</th>
-								<th>Sprint Estimate</th>
-							</tr>
-						</thead>
-						<tbody id="membertablelist">
-							<c:forEach items="${data}" var="item" varStatus="count">
-								<fmt:formatDate var="date" value="${item.key}" pattern="MM/dd/yyyy" />
-								<c:set var="jData" value="${jData},['${date}',${item.value}]"></c:set>
-								<tr id="row-${count.count}">
-									<td>${count.count}</td>
-									<td><c:out value="${date}" /></td>
-									<td>${item.value}</td>
-								</tr>
-							</c:forEach>
-
-						</tbody>
-					</table>
-				</div> */ %>
-				<!-- form method="get">
-				<div class="row">
-					<div class="col-lg-3">
-						<div class="form-group">
-							<label class="control-label">Product Backlog: </label>
-							<select id="productBacklog" name="productBacklog"
-							class="form-control cascadeDropdownn" >
-							    <option value="">-- Select --</option>
-							    <c:forEach var="item" items="${listProductBackLog}">
-							        <option value="${item.id}"><c:out value="${item.name}"/></option>
-							    </c:forEach>
-							</select>
-						</div>
-					</div>
-					<div class="col-lg-3">
-						<div class="form-group">
-							<label class="control-label">Release Backlog: </label>
-							<select id="releaseBacklog" name="releaseBacklog"
-							class="form-control cascadeDropdownn" >
-							    <option value="">-- Select --</option>
-							    <c:forEach var="item" items="${listProductBackLog}">
-							        <option value="${item.id}"><c:out value="${item.name}"/></option>
-							    </c:forEach>
-							</select>
-						</div>
-					</div>
-					</div>
-				</form> -->
 				<!-- chart -->
 				 <div id="chart1" style="margin-top:20px; margin-left:20px; width:800px; height:400px;"></div>
 				 <div id="chart2" style="margin-top:20px; margin-left:20px; width:550px; height:400px;"></div>
