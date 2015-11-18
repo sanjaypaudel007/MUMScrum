@@ -41,7 +41,6 @@ public class BurndownController {
 	public String generateBurndownChart(@PathVariable("sprintId") Long sprintId, Model model) {
 		
 		Map<Date, Double> workLogs = workLogService.getBurndownData(sprintId);
-//		model.addAttribute("listProductBackLog",productBacklogService.getAllList());
 		model.addAttribute("data", workLogs);
 		return "worklog/chart";
 	}

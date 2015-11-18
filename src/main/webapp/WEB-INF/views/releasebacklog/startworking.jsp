@@ -29,7 +29,6 @@
 					  		<form:options items="${scrumMasters }" itemValue="id" itemLabel="fullName"></form:options>
 					  	</form:select>			  				  
 					  </dd>
-					  <dt>Product Backlog: </dt><dd><c:out value="${releaseBacklog.productBacklog.name}"></c:out></dd>
 					</dl>
 					<input type="submit" value="Start" class="btn btn-outline btn-default btn-xs"/>
 					<input type="button" onclick="document.location.href='<spring:url value="/releasebacklog/detail/${releaseBacklog.id }" />'" 

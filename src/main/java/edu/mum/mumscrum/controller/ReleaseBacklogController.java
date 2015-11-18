@@ -34,10 +34,6 @@ public class ReleaseBacklogController {
 	@Autowired
 	ReleaseBacklogService releaseBacklogService;
 	
-
-//	@Autowired
-//	ProductBacklogService productBacklogService;
-	
 	@Autowired
 	SprintService sprintService;
 	
@@ -58,9 +54,7 @@ public class ReleaseBacklogController {
 	
 	@RequestMapping(value="/add", method= RequestMethod.GET)
 	public String getFormForAddReleaseBacklog(Model model, HttpServletRequest request){
-//		ProductBacklog pb = productBacklogService.getDetail(productBacklog);
 		ReleaseBacklog rb = new ReleaseBacklog();
-//		rb.setProductBacklog(pb);
 		model.addAttribute("releaseBacklog", rb);
 		model.addAttribute("buttonName", "Save");
 		model.addAttribute("title", "Add");
@@ -119,34 +113,16 @@ public class ReleaseBacklogController {
 	public String getStartWorkingForm(@PathVariable("id") Long releaseBacklogId, ModelMap model) {
 		logger.info("Editing release backlog with id " + releaseBacklogId);
 		ReleaseBacklog rb = releaseBacklogService.getDetail(releaseBacklogId);
-//		if (releaseBacklog == null)
-//			throw new ResponseStatusException("Requested release backlog doesn't exist");
-//		if(releaseBacklog.getScrumMaster() == null){
-//			releaseBacklog.setScrumMaster(new Employee());
-//		}
-//		List<Employee> scrumMasters = employeeService.getScrumMasters();
-//		model.addAttribute("scrumMasters", scrumMasters);
-//		model.addAttribute("releaseBacklog", releaseBacklog);
 		logger.info("Starting the release backlog.");
-//		return "releasebacklog/startworking";		
 		releaseBacklogService.startRelease(rb);
 		return "redirect:/releasebacklog/detail/"+ releaseBacklogId;
 	}
-	
-//	@RequestMapping(value = { "/startwork/{id}" }, method = RequestMethod.POST)
-//	public String doStartWork(@PathVariable("id") Long releaseBacklogId, @ModelAttribute("releaseBacklog") ReleaseBacklog rb, ModelMap model) {
-//		logger.info("Editing release backlog with id " + releaseBacklogId);		
-//		Integer scrumMasterId = rb.getScrumMaster().getId();
-//		releaseBacklogService.startRelease(rb);
-//		return "redirect:/releasebacklog/detail/"+ releaseBacklogId;		
-//	}
 	
 	@RequestMapping(value="/detail/{id}")
 	public String getDetail(@PathVariable("id") Long releaseBacklogId, Model model){
 		ReleaseBacklog rb = releaseBacklogService.getDetailWithUserStories(releaseBacklogId);
 		model.addAttribute("releaseBacklog", rb);
 		model.addAttribute("addedUserStories", rb.getUserStories());
-//		model.addAttribute("notAddedUserStories", productBacklogService.getUserStoriesNotAddedToReleaseBacklog(rb.getProductBacklog()));
 		model.addAttribute("sprints", sprintService.getSprintFor(releaseBacklogId));
 		return "releasebacklog/detail";
 	}
@@ -160,23 +136,4 @@ public class ReleaseBacklogController {
 		return response;
 	}
 	
-	/*
-	@RequestMapping(value = "/optionlist/{id}", method = RequestMethod.GET)
-	// @ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public @ResponseBody List< Pair<Integer, String> > optionList(@PathVariable long id, HttpServletRequest request) throws RuntimeException {
-		return releaseBacklogService.getOptionList(id);
-	}
-	
-	@RequestMapping(value = "/{rb_id}/addus/{us_id}")
-	public String addUserStory(@PathVariable("rb_id") Long releaseBacklogId, @PathVariable("us_id") Long userStoryId){
-		releaseBacklogService.addUserStory(releaseBacklogId, userStoryId);
-		return "redirect:/releasebacklog/detail/" + releaseBacklogId;
-	}
-	
-	@RequestMapping(value = "/{rb_id}/removeus/{us_id}")
-	public String removeUserStory(@PathVariable("rb_id") Long releaseBacklogId, @PathVariable("us_id") Long userStoryId){
-		releaseBacklogService.removeUserStory(releaseBacklogId, userStoryId);
-		return "redirect:/releasebacklog/detail/" + releaseBacklogId;
-	}
-	*/
 }

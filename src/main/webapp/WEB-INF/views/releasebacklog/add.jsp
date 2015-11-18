@@ -58,7 +58,6 @@
         	</div>
         </div>
 		<input class="btn btn-primary" type="submit" value="${buttonName}"/>
-		<%-- <c:set var="cancel_url" value="/productbacklog/detail/${releaseBacklog.productBacklog.id }"></c:set> --%>
 		<c:if test="${buttonName == 'Update' }">
 			<c:set var="cancel_url" value="/releasebacklog/detail/${releaseBacklog.id }"></c:set>
 		</c:if>

@@ -101,10 +101,6 @@ public class UserStoryController {
 		if (userStory == null)
 			throw new ResponseStatusException();
 
-		// List<ReleaseBacklog> listReleaseBackLog =
-		// releaseBacklogService.getReleaseBacklogFor(productBacklogId);
-
-		// model.addAttribute("listReleaseBackLog", listReleaseBackLog);
 		model.addAttribute("userStory", userStory);
 		model.addAttribute("buttonName", "Update");
 		model.addAttribute("title", "Edit");
@@ -130,7 +126,6 @@ public class UserStoryController {
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	// @ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public @ResponseBody Response delete(@PathVariable long id, HttpServletRequest request) throws RuntimeException {
-		// productBacklogService.delete(id);
 		Response response = new Response();
 		response.setMessage("Record successfully deleted.");
 		response.setSuccess(true);

@@ -30,9 +30,6 @@ public class ReleaseBacklogServiceImpl implements ReleaseBacklogService {
 
 	@Override
 	public void add(ReleaseBacklog releaseBacklog) {
-//		ProductBacklog pb = productBacklogRepository.findOne(productBacklogId);
-//		releaseBacklog.setProductBacklog(pb);
-//		releaseBacklog.setStatus(Status.NEW);
 		releaseBacklogRepository.save(releaseBacklog);
 	}
 
@@ -44,7 +41,6 @@ public class ReleaseBacklogServiceImpl implements ReleaseBacklogService {
 	@Override
 	public void edit(Long releaseBacklogId, ReleaseBacklog releaseBacklog) {
 		ReleaseBacklog rb = releaseBacklogRepository.findOne(releaseBacklogId);
-//		releaseBacklog.setProductBacklog(rb.getProductBacklog());
 		releaseBacklogRepository.save(releaseBacklog);
 	}
 
@@ -54,19 +50,6 @@ public class ReleaseBacklogServiceImpl implements ReleaseBacklogService {
 		return (List<ReleaseBacklog>)releaseBacklogRepository.findAll();
 	}
 	
-//	@Override
-//	public List< Pair<Integer, String> > getOptionList(Long productBacklogId) {
-//		List< Pair<Integer, String>> optionList = new ArrayList< Pair<Integer,String>>();
-//		ProductBacklog productBacklog = productBacklogRepository.findOne(productBacklogId);
-//		List<ReleaseBacklog> releaseBacklogList = releaseBacklogRepository.getForProductBacklog(productBacklog);
-//		
-//		if(releaseBacklogList != null){
-//			for(ReleaseBacklog releaseBacklog: releaseBacklogList){
-//				optionList.add(new Pair(releaseBacklog.getId(), releaseBacklog.getName()));
-//			}
-//		}
-//		return optionList;
-//	}
 
 	@Override
 	@Transactional
@@ -139,15 +122,7 @@ public class ReleaseBacklogServiceImpl implements ReleaseBacklogService {
 		ReleaseBacklog releaseBacklog = releaseBacklogRepository.findOne(rb.getId());
 		if (releaseBacklog == null)
 			throw new ResponseStatusException("Requested release backlog doesn't exist");
-//		Employee scrumMaster = employeeRepository.findOne(scrumMasterId);
-//		if (scrumMaster == null)
-//			throw new ResponseStatusException("Requested scrum master doesn't exist");
-//		releaseBacklog.setScrumMaster(scrumMaster);
-//		releaseBacklog.setStartDate(changedReleaseBacklog.getStartDate());
-//		releaseBacklog.setDeadline(changedReleaseBacklog.getDeadline());
 		releaseBacklog.setStatus(Status.IN_PROGRESS);
-//		releaseBacklog.getProductBacklog().setStatus(Status.IN_PROGRESS);
-//		productBacklogRepository.save(releaseBacklog.getProductBacklog());
 		releaseBacklogRepository.save(releaseBacklog);
 	}
 	

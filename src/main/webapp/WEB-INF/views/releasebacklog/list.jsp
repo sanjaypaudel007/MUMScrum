@@ -27,7 +27,6 @@
                                             <th>Description</th>
                                             <th>Status</th>
                                             <th>Date</th>
-                                            <!-- <th>Product Backlog</th> -->
                                             <th align="center">Action</th>
                                         </tr>
                                     </thead>
@@ -39,7 +38,6 @@
 										      <td>${item.description}</td>
 										      <td>${item.status }</td>
 										      <td><fmt:formatDate value="${item.startDate }" pattern="MM/dd/yyyy"/>  - <fmt:formatDate value="${item.deadline }" pattern="MM/dd/yyyy"/></td>
-										      <%-- <td><c:out value="${item.productBacklog.name}"/></td> --%>
 										      <td>
 											      	<a href="<spring:url value="/releasebacklog/detail/${item.id}" />" title="Detail"><i class="fa fa-eye fa-fw"></i></a>
 										      	<security:authorize access="hasRole('SCRUM_MASTER')">

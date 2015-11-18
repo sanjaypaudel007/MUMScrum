@@ -21,7 +21,6 @@
 				  <dt>Description: </dt><dd><c:out value="${releaseBacklog.description}"></c:out></dd>
 				  <dt>Date: </dt><dd><fmt:formatDate value="${releaseBacklog.startDate }" pattern="MM/dd/yyyy"/>  - <fmt:formatDate value="${releaseBacklog.deadline }" pattern="MM/dd/yyyy"/></dd>
 				  <dt>Scrum Master: </dt><dd><c:out value="${releaseBacklog.scrumMaster == null? 'Not Assigned': releaseBacklog.scrumMaster.fullName}"></c:out></dd>
-				  <%-- <dt>Product Backlog: </dt><dd><c:out value="${releaseBacklog.productBacklog.name}"></c:out></dd> --%>
 				  <dt>Status: </dt><dd><c:out value="${releaseBacklog.status }"/></dd>
 				</dl>
 				<security:authorize access="hasRole('SCRUM_MASTER')"> 
@@ -40,7 +39,7 @@
 	
 	 <div class="col-lg-6">
 		<div class="panel panel-info">
-		<div class="panel-heading" ><!-- onclick="showReleaseList('${productBacklog.id}')"> -->
+		<div class="panel-heading" >
 		<i class="fa fa-list fa-fw"></i>User Stories</div>
 			<div class="panel-body">
 				<security:authorize access="hasRole('SCRUM_MASTER')"> 
@@ -83,7 +82,7 @@
  
 	 <div class="col-lg-6">
 		<div class="panel panel-info">
-		<div class="panel-heading" ><!-- onclick="showReleaseList('${productBacklog.id}')"> -->
+		<div class="panel-heading" >
 		<i class="fa fa-list fa-fw"></i>Sprints</div>
 			<div class="panel-body">
 			 <security:authorize access="hasRole('SCRUM_MASTER')">

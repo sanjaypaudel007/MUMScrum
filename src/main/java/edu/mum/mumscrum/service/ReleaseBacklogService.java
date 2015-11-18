@@ -5,7 +5,6 @@ import java.util.List;
 import edu.mum.mumscrum.entity.ReleaseBacklog;
 
 public interface ReleaseBacklogService {
-	//public List<ReleaseBacklog> getReleaseBacklogFor(Long productBacklogId);
 
 	public void add(ReleaseBacklog releaseBacklog);
 
@@ -15,8 +14,6 @@ public interface ReleaseBacklogService {
 	
 	public List<ReleaseBacklog> getAllList();
 	
-	//public List< Pair<Integer, String> > getOptionList(Long productBacklogId);
-
 	public ReleaseBacklog getDetailWithUserStories(Long releaseBacklogId);
 
 	public void addUserStory(Long releaseBacklogId, Long userStoryId);
