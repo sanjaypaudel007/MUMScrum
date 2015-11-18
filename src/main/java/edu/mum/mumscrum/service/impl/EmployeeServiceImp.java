@@ -23,7 +23,7 @@ public class EmployeeServiceImp implements EmployeeService {
 	public void addEmployee(Employee employee) {
 		employeeRepository.save(employee);
 	}
-	
+
 	@PreAuthorize(value = "hasRole('ADMIN')")
 	public void deleteEmployee(int employeeId) {
 		employeeRepository.delete(employeeId);
@@ -50,7 +50,7 @@ public class EmployeeServiceImp implements EmployeeService {
 
 	public boolean checkUsername(String username, int employeeId) {
 		Employee employee = employeeRepository.getEmployeeByUsername(username);
-		//return (employee != null && employee.getId() != employeeId);
+		// return (employee != null && employee.getId() != employeeId);
 		return (employee != null);
 
 	}
@@ -65,22 +65,33 @@ public class EmployeeServiceImp implements EmployeeService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
 	public List<Employee> getAllDevelopers() {
-		//return null;
+		// return null;
 		return employeeRepository.getEmployeesByRole("DEVELOPER");
 	}
+
 	@Override
 	public List<Employee> getAllTesters() {
-		//return null;
+		// return null;
 		return employeeRepository.getEmployeesByRole("TESTER");
 	}
 
 	@Override
-	public void changePassword(String username, String password) {
+	public boolean changePassword(String username, String oldPassword,
+			String password) {
 		Employee employee = employeeRepository.getEmployeeByUsername(username);
-		employee.setPassword(encryptPass(employee.getPassword()));
-		employeeRepository.save(employee);
-		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String savedPassword = employee.getPassword();
+
+		if (passwordEncoder.matches(oldPassword, savedPassword)) {
+			employee.setPassword(encryptPass(password));
+			employeeRepository.save(employee);
+			return true;
+		} else {
+			return false;
+		}
 	}
+
 }

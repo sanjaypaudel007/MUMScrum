@@ -26,7 +26,19 @@
 			<div class="row">
 				<div class="col-lg-10">			
 							<div class="col-lg-2">
-								<label class="control-label">Password: </label>
+								<label class="control-label">Old Password: </label>
+							</div>
+							<div class="col-lg-6">
+								<input placeholder="old Password" name="oldPassword"
+									type="password" class="form-control" />
+							</div>
+						</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-10">			
+							<div class="col-lg-2">
+								<label class="control-label">New Password: </label>
 							</div>
 							<div class="col-lg-6">
 								<input placeholder="Password" name="password"

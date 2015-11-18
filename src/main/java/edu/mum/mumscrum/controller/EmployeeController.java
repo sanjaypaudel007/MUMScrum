@@ -214,18 +214,22 @@ public class EmployeeController {
 	public String changePassword(ModelMap model) {
 		return "employee/changepassword";
 	}
-	
+
 	@RequestMapping(value = "/changepassword", method = RequestMethod.POST)
-	public String changePassword(@RequestParam("password") String password,
+	public String changePassword(
+			@RequestParam("oldPassword") String oldPassword,
+			@RequestParam("password") String password,
 			@RequestParam("rePassword") String rePassword, ModelMap model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
 		String username = auth.getName();
 		if (password.equals(rePassword)) {
-			employeeService.changePassword(username, password);
-			return "redirect:/";
+			if (employeeService.changePassword(username, oldPassword, password)) {
+				return "redirect:/";
+			}
 		}
-		return "/changepassword";
-		
+		return "employee/changepassword";
+
 	}
 
 }

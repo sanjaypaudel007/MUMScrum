@@ -29,5 +29,5 @@ public interface EmployeeService {
 
 	public List<Employee> getAllTesters();
 
-	public void changePassword(String username, String password);
+	public boolean changePassword(String username, String oldPassword, String password);
 }
