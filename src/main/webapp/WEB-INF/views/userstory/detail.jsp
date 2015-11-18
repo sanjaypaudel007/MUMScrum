@@ -42,6 +42,14 @@
 					<dd>
 						<c:out value="${userStory.sprint.name}"></c:out>
 					</dd>
+					<dt>Development Estimate:</dt>
+					<dd>
+						<c:out value="${userStory.developmentEstimate}"></c:out>
+					</dd>
+					<dt>Test Estimate:</dt>
+					<dd>
+						<c:out value="${userStory.testingEstimate}"></c:out>
+					</dd>
 					<dt>Assignee:</dt>
 					<dd>
 						<c:out value="${userStory.developer.fullName}"></c:out>
