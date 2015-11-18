@@ -52,8 +52,8 @@ public class Employee {
 	@Column(name = "email")
 	private String email;
 
-	@NotNull(message = "Valid date dd/MM/yyyy")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@NotNull(message = "Valid date MM/dd/yyyy")
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date dob;
 

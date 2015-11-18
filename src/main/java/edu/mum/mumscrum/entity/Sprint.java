@@ -17,8 +17,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import edu.mum.mumscrum.enums.Status;
 
@@ -29,15 +33,26 @@ public class Sprint {
 	private Long id;
 	@NotBlank
 	private String name;
+	
 	private String description;
+
+	@NotNull(message = "Valid date MM/dd/yyyy")
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
+	@Temporal(TemporalType.DATE)
 	private Date startDate;
+
+	@NotNull(message = "Valid date MM/dd/yyyy")
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
+	@Temporal(TemporalType.DATE)
 	private Date endDate;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "releaseBacklog_id")
 	private ReleaseBacklog releaseBacklog;
+	
 	@OneToMany(mappedBy = "sprint", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<UserStory> userStories;
+	
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	

@@ -16,9 +16,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import edu.mum.mumscrum.enums.Status;
 
@@ -36,8 +40,14 @@ public class ReleaseBacklog {
 	@NotEmpty(message = "Description cannot be empty.")
 	private String description;
 
+	@NotNull(message = "Valid date MM/dd/yyyy")
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
+	@Temporal(TemporalType.DATE)
 	private Date startDate;
 
+	@NotNull(message = "Valid date MM/dd/yyyy")
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
+	@Temporal(TemporalType.DATE)
 	private Date deadline;
 
 	@OneToMany(mappedBy="releaseBacklog", fetch=FetchType.LAZY, cascade= CascadeType.ALL)
