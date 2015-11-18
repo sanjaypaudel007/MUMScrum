@@ -68,9 +68,14 @@
         </div>
 		<input class="btn btn-primary" type="submit" value="${buttonName}"/>
 		<%-- <c:set var="cancel_url" value="/productbacklog/detail/${releaseBacklog.productBacklog.id }"></c:set> --%>
-		<c:if test="${buttonName == 'Update' }">
+		<c:if test="${buttonName == 'Update'}">
 			<c:set var="cancel_url" value="/releasebacklog/detail/${releaseBacklog.id }"></c:set>
 		</c:if>
+		
+		<c:if test="${buttonName == 'Save'}">
+			<c:set var="cancel_url" value="/releasebacklog/list"></c:set>
+		</c:if>
+		
 		<input type="button" onclick="document.location.href='<spring:url value="${cancel_url}" />'" 
 		class="btn btn-warning" value=" Cancel ">
     
