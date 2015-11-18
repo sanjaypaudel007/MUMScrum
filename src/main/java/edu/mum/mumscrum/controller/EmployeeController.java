@@ -31,7 +31,6 @@ import edu.mum.mumscrum.entity.Role;
 import edu.mum.mumscrum.response.ResponseStatusException;
 import edu.mum.mumscrum.service.EmployeeService;
 import edu.mum.mumscrum.service.RoleService;
-import edu.mum.mumscrum.validator.EmployeeFormValidator;
 
 @Controller
 @RequestMapping(value = "/employee")
@@ -41,8 +40,6 @@ public class EmployeeController {
 	private EmployeeService employeeService;
 	@Autowired
 	private RoleService roleService;
-	@Autowired
-	private EmployeeFormValidator employeeFormValidator;
 
 	private List<Role> roleList;
 
@@ -69,9 +66,6 @@ public class EmployeeController {
 	@InitBinder
 	protected void initBinder(HttpServletRequest request,
 			ServletRequestDataBinder binder) throws Exception {
-
-		// super.initBinder(request, binder);
-
 		binder.registerCustomEditor(Set.class, "roles",
 				new CustomCollectionEditor(Set.class) {
 
@@ -89,62 +83,41 @@ public class EmployeeController {
 
 	}
 
-	// @InitBinder
-	// protected void initBinder(WebDataBinder binder) throws Exception{
-	// binder.registerCustomEditor(Set.class,"roles", new
-	// CustomCollectionEditor(Set.class){
-	// protected Object convertElement(Object element){
-	// if (element instanceof String) {
-	// Role role = roleList.get(Integer.parseInt(element.toString()));
-	//
-	// return role;
-	// }
-	// return null;
-	// }
-	// });
-	// }
-
 	@RequestMapping(value = { "/register" }, method = RequestMethod.POST)
 	public String processRegistration(
 			@Valid @ModelAttribute("employee") Employee employee,
 			BindingResult result, Model model, HttpServletRequest request)
 			throws IllegalStateException, IOException {
 
-		// employeeFormValidator.setAction("Add");
-		// employeeFormValidator.validate(employee, result);
-		// for (int i = 0; i < employee.getroles().size(); i++) {
-		// if(employee.getroles().get(1)!=null)
-		// System.out.println("Roles::"+employee.getroles().get(1).getRole());
-		// }
-
 		if (result.hasErrors()) {
 			return "employee/register";
 		}
 
 		if (employee.getPassword().equals(employee.getRePassword())) {
-			// if (!employeeService.checkUsername(employee.getUsername(),
-			// employee.getId())) {
-			employee.setPassword(employeeService.encryptPass(employee
-					.getPassword()));
-			// User Image
-			MultipartFile employeeImage = employee.getImage();
-			if (employeeImage != null && !employeeImage.isEmpty()) {
-				String rootDictory = request.getSession().getServletContext()
-						.getRealPath("/");
-				String imageSaveName = String.valueOf(employee.getUsername())
-						+ employeeImage.getOriginalFilename();
-				employee.setImageUrl(imageSaveName);
-				employeeImage.transferTo(new File(rootDictory
-						+ "resources\\employeeImages\\" + imageSaveName));
-			}
-			// save
-			employeeService.addEmployee(employee);
-			return "redirect:/employee";
-			// } else {
-
-			// result.rejectValue("username","error.username",
-			// "Try Again!! User Already exist!");
-			// }
+//			if (!employeeService.checkUsername(employee.getUsername(),
+//					employee.getId())) {
+				employee.setPassword(employeeService.encryptPass(employee
+						.getPassword()));
+				// User Image
+				MultipartFile employeeImage = employee.getImage();
+				if (employeeImage != null && !employeeImage.isEmpty()) {
+					String rootDictory = request.getSession()
+							.getServletContext().getRealPath("/");
+					String imageSaveName = String.valueOf(employee
+							.getUsername())
+							+ employeeImage.getOriginalFilename();
+					employee.setImageUrl(imageSaveName);
+					employeeImage.transferTo(new File(rootDictory
+							+ "resources\\employeeImages\\" + imageSaveName));
+				}
+				// save
+				employeeService.addEmployee(employee);
+				return "redirect:/employee";
+//			} else {
+//
+//				result.rejectValue("username", "error.username",
+//						"Try Again!! User Already exist!");
+//			}
 
 		} else {
 
@@ -223,7 +196,7 @@ public class EmployeeController {
 		employee.setId(employeeOld.getId());
 		employee.setPassword(employeeOld.getPassword());
 		if (result.hasErrors()) {
-			return "employee/edit";
+			return "employee/editProfile";
 		}
 		MultipartFile employeeImage = employee.getImage();
 		if (employeeImage != null && !employeeImage.isEmpty()) {
