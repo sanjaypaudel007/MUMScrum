@@ -165,28 +165,28 @@ public class SprintServiceImpl implements SprintService {
 		return result;
 	}
 
-	@Override
-	@Transactional
-	public void updateEstimation(Sprint sprint, List<UserStory> userStories, String username) {
-		Employee user = employeeRepository.getEmployeeByUsername(username);
-		for(UserStory us: userStories){
-			UserStory userStory = userStoryRepository.findOne(us.getId());
-			userStory.setStatus(Status.IN_PROGRESS);
-			if(userStory.getDeveloper().getId() == user.getId()){
-				userStory.setDevelopmentEstimate(us.getDevelopmentEstimate());
-			}else{
-				userStory.setTestingEstimate(us.getDevelopmentEstimate());
-			}
-			WorkLog wl = new WorkLog();
-			wl.setDate(sprint.getStartDate());
-			wl.setEstimatingPerson(user);
-			wl.setRemainingWorkEstimation(us.getDevelopmentEstimate());
-			wl.setUserStory(userStory);
-			workLogRepository.deleteExistingWorklog(wl.getUserStory(), wl.getEstimatingPerson(), wl.getDate());
-			workLogRepository.save(wl);
-			userStoryRepository.save(userStory);
-		}
-	}
+//	@Override
+//	@Transactional
+//	public void updateEstimation(Sprint sprint, List<UserStory> userStories, String username) {
+//		Employee user = employeeRepository.getEmployeeByUsername(username);
+//		for(UserStory us: userStories){
+//			UserStory userStory = userStoryRepository.findOne(us.getId());
+//			userStory.setStatus(Status.IN_PROGRESS);
+//			if(userStory.getDeveloper().getId() == user.getId()){
+//				userStory.setDevelopmentEstimate(us.getDevelopmentEstimate());
+//			}else{
+//				userStory.setTestingEstimate(us.getDevelopmentEstimate());
+//			}
+//			WorkLog wl = new WorkLog();
+//			wl.setDate(sprint.getStartDate());
+//			wl.setEstimatingPerson(user);
+//			wl.setRemainingWorkEstimation(us.getDevelopmentEstimate());
+//			wl.setUserStory(userStory);
+//			workLogRepository.deleteExistingWorklog(wl.getUserStory(), wl.getEstimatingPerson(), wl.getDate());
+//			workLogRepository.save(wl);
+//			userStoryRepository.save(userStory);
+//		}
+//	}
 	
 	public void updateEstimation(Sprint sprint, UserStory userStory) {
 		Iterable<WorkLog> workLog = workLogRepository.findAll(userStory);

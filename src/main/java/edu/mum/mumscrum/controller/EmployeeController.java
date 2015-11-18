@@ -239,7 +239,7 @@ public class EmployeeController {
 
 		}
 		employeeService.addEmployee(employee);
-		return "redirect:/employee";
+		return "redirect:/employee/detail";
 
 	}
 
