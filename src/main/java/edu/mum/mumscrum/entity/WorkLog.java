@@ -24,9 +24,9 @@ public class WorkLog {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
-	@NotNull(message = "Valid date MM/dd/yyyy")
-	@DateTimeFormat(pattern = "MM/dd/yyyy")
-	@Temporal(TemporalType.DATE)
+//	@NotNull(message = "Valid date MM/dd/yyyy")
+//	@DateTimeFormat(pattern = "MM/dd/yyyy")
+//	@Temporal(TemporalType.DATE)
 	private Date date;
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.REFRESH)

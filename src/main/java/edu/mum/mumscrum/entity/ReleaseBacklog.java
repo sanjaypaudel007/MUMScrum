@@ -40,14 +40,14 @@ public class ReleaseBacklog {
 	@NotEmpty(message = "Description cannot be empty.")
 	private String description;
 
-	@NotNull(message = "Valid date MM/dd/yyyy")
-	@DateTimeFormat(pattern = "MM/dd/yyyy")
-	@Temporal(TemporalType.DATE)
+//	@NotNull(message = "Valid date MM/dd/yyyy")
+//	@DateTimeFormat(pattern = "MM/dd/yyyy")
+//	@Temporal(TemporalType.DATE)
 	private Date startDate;
 
-	@NotNull(message = "Valid date MM/dd/yyyy")
-	@DateTimeFormat(pattern = "MM/dd/yyyy")
-	@Temporal(TemporalType.DATE)
+//	@NotNull(message = "Valid date MM/dd/yyyy")
+//	@DateTimeFormat(pattern = "MM/dd/yyyy")
+//	@Temporal(TemporalType.DATE)
 	private Date deadline;
 
 	@OneToMany(mappedBy="releaseBacklog", fetch=FetchType.LAZY, cascade= CascadeType.ALL)

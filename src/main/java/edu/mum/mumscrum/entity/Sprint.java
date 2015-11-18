@@ -36,14 +36,14 @@ public class Sprint {
 	
 	private String description;
 
-	@NotNull(message = "Valid date MM/dd/yyyy")
-	@DateTimeFormat(pattern = "MM/dd/yyyy")
-	@Temporal(TemporalType.DATE)
+//	@NotNull(message = "Valid date MM/dd/yyyy")
+//	@DateTimeFormat(pattern = "MM/dd/yyyy")
+//	@Temporal(TemporalType.DATE)
 	private Date startDate;
 
-	@NotNull(message = "Valid date MM/dd/yyyy")
-	@DateTimeFormat(pattern = "MM/dd/yyyy")
-	@Temporal(TemporalType.DATE)
+//	@NotNull(message = "Valid date MM/dd/yyyy")
+//	@DateTimeFormat(pattern = "MM/dd/yyyy")
+//	@Temporal(TemporalType.DATE)
 	private Date endDate;
 
 	@ManyToOne(fetch = FetchType.EAGER)
