@@ -68,7 +68,7 @@
 							</div>
 							<div class="col-lg-6">
 								<div class='input-group date' id="dobdate-picker">
-									<form:input path="dob" placeholder="DD/MM/YYYY"
+									<form:input path="dob" placeholder="MM/DD/YYYY"
 										class="form-control" />
 									<span class="input-group-addon"> <span
 										class="glyphicon glyphicon-calendar"></span>
