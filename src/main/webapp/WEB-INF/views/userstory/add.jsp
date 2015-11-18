@@ -25,18 +25,6 @@
            <div class="col-lg-6">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
 					</div>
-				<!--<spring:bind path="releaseBacklog.id">
-					<div class="form-group ${status.error ? 'has-error' : ''}">
-						<label class="control-label">Release Backlog: </label>
-						<form:select id="releaseBacklog" name="releaseBacklog.id" path="releaseBacklog.id" class="form-control">
-						    <option value="">-- Select --</option>
-						    <c:forEach var="item" items="${listReleaseBackLog}">
-						        <form:option value="${item.id}"><c:out value="${item.name}"/></form:option>
-						    </c:forEach>
-						</form:select>
-					    <form:errors path="releaseBacklog.id" class="help-block"></form:errors>
-					</div>
-				</spring:bind>-->
            		<spring:bind path="name">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
 						<label class="control-label">Name: </label>
@@ -64,15 +52,6 @@
 					    <form:errors path="priority" class="help-block"></form:errors>
 					</div>
 				</spring:bind>
-				<!-- 
-				<spring:bind path="developmentEstimate">
-					<div class="form-group ${status.error ? 'has-error' : ''}">
-						<label class="control-label">Development Estimate: </label>
-					    <form:input path="developmentEstimate" placeholder="Total development time estimate" class="form-control" />
-					    <form:errors path="developmentEstimate" class="help-block"></form:errors>
-					</div>
-				</spring:bind>
-				 -->
 				 	 <form:hidden path="developmentEstimate" />
 				    <form:hidden path="testingEstimate" />
         	</div>
@@ -86,32 +65,3 @@
 
 	</div>
 </div>
-<script type="text/javascript">
-$().ready(function(){
-	$("#productBackloggg").on("change",function(){
-		var target = "releaseBacklog";
-		var url = "<spring:url value="/releasebacklog/optionlist" />"+"/"+$(this).val();
-		$.ajax({
-			url: url,
-			type:"get",
-			dataType:"json",
-			async: true,
-			success:function(response)
-			{
-				$("#"+target).empty();
-				$("#"+target).append($('<option></option>').attr("value", "").text("-- Select --"));
-				$.each(response, function(index, item){
-					$("#"+target).append($('<option></option>').attr("value", item.key).text(item.value));
-				});
-			},
-			error:function(result)
-			{
-				alert(result)
-			}
-		});
-		
-	}).change();
-	
-});
-</script>
-

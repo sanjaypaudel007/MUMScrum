@@ -29,7 +29,7 @@
 										      <td>${item.status}</td>
 										      <td>${item.priority}</td>
 										      <td>${item.sprint.name}</td>
-										      <td align="right">
+										      <td>
 										      <security:authorize access="hasRole('SCRUM_MASTER')">
 										      	<c:if test="${item.status == 'NEW'}">
 										      		<a href="<spring:url value="/userstory/edit/${item.id}" />" title="Edit"><i class="fa fa-edit fa-fw"></i></a>

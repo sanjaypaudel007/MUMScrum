@@ -24,31 +24,6 @@
 	
 		<div class="row">
            <div class="col-lg-6">
-        	   <%-- <spring:bind path="productBacklog.id">
-					<div class="form-group ${status.error ? 'has-error' : ''}">
-						<label class="control-label">Product Backlog: </label>
-						<form:select id="productBacklog" name="productBacklog.id" path="productBacklog.id" 
-						class="form-control cascadeDropdownn" >
-						    <option value="">-- Select --</option>
-						    <c:forEach var="item" items="${listProductBackLog}">
-						        <form:option value="${item.id}"><c:out value="${item.name}"/></form:option>
-						    </c:forEach>
-						</form:select>
-					    <form:errors path="productBacklog.id" class="help-block"></form:errors>
-					</div>
-				</spring:bind> --%>
-				<!--<spring:bind path="releaseBacklog.id">
-					<div class="form-group ${status.error ? 'has-error' : ''}">
-						<label class="control-label">Release Backlog: </label>
-						<form:select id="releaseBacklog" name="releaseBacklog.id" path="releaseBacklog.id" class="form-control">
-						    <option value="">-- Select --</option>
-						    <c:forEach var="item" items="${listReleaseBackLog}">
-						        <form:option value="${item.id}"><c:out value="${item.name}"/></form:option>
-						    </c:forEach>
-						</form:select>
-					    <form:errors path="releaseBacklog.id" class="help-block"></form:errors>
-					</div>
-				</spring:bind>-->
            		<spring:bind path="name">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
 						<label class="control-label">Name: </label>
@@ -77,32 +52,3 @@
 
 	</div>
 </div>
-<script type="text/javascript">
-$().ready(function(){
-	$("#productBackloggg").on("change",function(){
-		var target = "releaseBacklog";
-		var url = "<spring:url value="/releasebacklog/optionlist" />"+"/"+$(this).val();
-		$.ajax({
-			url: url,
-			type:"get",
-			dataType:"json",
-			async: true,
-			success:function(response)
-			{
-				$("#"+target).empty();
-				$("#"+target).append($('<option></option>').attr("value", "").text("-- Select --"));
-				$.each(response, function(index, item){
-					$("#"+target).append($('<option></option>').attr("value", item.key).text(item.value));
-				});
-			},
-			error:function(result)
-			{
-				alert(result)
-			}
-		});
-		
-	}).change();
-	
-});
-</script>
-

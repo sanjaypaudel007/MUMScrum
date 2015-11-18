@@ -34,7 +34,7 @@
 										      <td><fmt:formatDate value="${item.startDate }" pattern="MM/dd/yyyy"/>  - <fmt:formatDate value="${item.endDate }" pattern="MM/dd/yyyy"/></td>
 										      <td>${item.status}</td>
 										      <td>${item.releaseBacklog.name }</td>
-										      <td align="right">
+										      <td>
 										      	<a href="<spring:url value="/burndown/sprint/${item.id}" />" title="View Burndown Chart"><i class="fa fa-line-chart fa-fw"></i></a>
 										      	<a href="<spring:url value="/sprint/detail/${item.id}" />" title="Detail"><i class="fa fa-eye fa-fw"></i></a>
 										      	<security:authorize access="hasRole('SCRUM_MASTER')">
