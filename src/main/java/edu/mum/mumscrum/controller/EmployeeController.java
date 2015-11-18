@@ -156,6 +156,23 @@ public class EmployeeController {
 	@RequestMapping(value = { "/detail/{id}" }, method = RequestMethod.GET)
 	public String displayDetail(@PathVariable Integer id, ModelMap model) {
 		Employee employee = employeeService.getEmployee(id);
+
+		if (employee == null)
+			throw new ResponseStatusException(
+					"The requested user exist doesn't exist.");
+		model.addAttribute("employee", employee);
+		return "employee/detail";
+	}
+
+	@RequestMapping(value = { "/detail" }, method = RequestMethod.GET)
+	public String displayDetailByName(ModelMap model) {
+		Employee employee;
+
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
+		String username = auth.getName();
+		employee = employeeService.getEmployeeDetail(username);
+
 		if (employee == null)
 			throw new ResponseStatusException(
 					"The requested user exist doesn't exist.");
@@ -177,6 +194,53 @@ public class EmployeeController {
 		model.addAttribute(employee);
 		model.addAttribute("roleList", roleList);
 		return "employee/edit";
+	}
+
+	@RequestMapping(value = "/editProfile", method = RequestMethod.GET)
+	public String editEmployee(ModelMap model) {
+		Employee employee;
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
+		String username = auth.getName();
+		employee = employeeService.getEmployeeDetail(username);
+		List<Role> roleLists = roleService.getAllList();
+		Set<Role> roleList = new HashSet<Role>(roleLists);
+		model.addAttribute(employee);
+		model.addAttribute("roleList", roleList);
+		return "employee/editProfile";
+	}
+
+	@RequestMapping(value = "/editProfile", method = RequestMethod.POST)
+	public String editEmployee(
+			@Valid @ModelAttribute("employee") Employee employee,
+			BindingResult result, Model model, HttpServletRequest request)
+			throws IllegalStateException, IOException {
+		Employee employeeOld;
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
+		String username = auth.getName();
+		employeeOld = employeeService.getEmployeeDetail(username);
+		employee.setId(employeeOld.getId());
+		employee.setPassword(employeeOld.getPassword());
+		if (result.hasErrors()) {
+			return "employee/edit";
+		}
+		MultipartFile employeeImage = employee.getImage();
+		if (employeeImage != null && !employeeImage.isEmpty()) {
+			String rootDictory = request.getSession().getServletContext()
+					.getRealPath("/");
+			String imageSaveName = String.valueOf(employee.getUsername())
+					+ employeeImage.getOriginalFilename();
+			employee.setImageUrl(imageSaveName);
+			employeeImage.transferTo(new File(rootDictory
+					+ "resources\\employeeImages\\" + imageSaveName));
+		} else {
+			employee.setImageUrl(employeeOld.getImageUrl());
+
+		}
+		employeeService.addEmployee(employee);
+		return "redirect:/employee";
+
 	}
 
 	@RequestMapping(value = "/edit/{employeeId}", method = RequestMethod.POST)

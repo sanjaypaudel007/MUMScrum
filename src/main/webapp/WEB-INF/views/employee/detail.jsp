@@ -8,12 +8,13 @@
 	<div class="col-lg-12">
 		<h4 class="page-header">Employee Detail</h4>
 	</div>
+	
 </div>
 <div class="row">
 	<div class="col-lg-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<i class="fa fa-list fa-fw"></i>Detail
+				<i class="fa fa-list fa-fw"></i> <c:out value="${employee.username}"></c:out>
 			</div>
 			<div class="panel-body">
 				<div class="media">
@@ -52,5 +53,9 @@
 </div>
 <input type="button" onclick="document.location.href='<spring:url value="/employee" />'" 
 					class="btn btn-outline btn-primary btn-xs" value="Back to List ">
+					
+	<input type="button" onclick="document.location.href='<spring:url value="/employee/editProfile" />'" 
+					class="btn btn-outline btn-danger btn-xs" value="Edit My Profile">
+	
   
 
