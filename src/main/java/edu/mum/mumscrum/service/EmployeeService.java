@@ -21,7 +21,7 @@ public interface EmployeeService {
 
 	public Employee validateEmployee(Employee employee);
 	
-	public boolean checkUsername(String username, int employeeId);
+	public boolean checkUsername(String username);
 
 	public String encryptPass(String password);
 

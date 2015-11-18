@@ -94,8 +94,7 @@ public class EmployeeController {
 		}
 
 		if (employee.getPassword().equals(employee.getRePassword())) {
-//			if (!employeeService.checkUsername(employee.getUsername(),
-//					employee.getId())) {
+			if (!employeeService.checkUsername(employee.getUsername())) {
 				employee.setPassword(employeeService.encryptPass(employee
 						.getPassword()));
 				// User Image
@@ -113,11 +112,11 @@ public class EmployeeController {
 				// save
 				employeeService.addEmployee(employee);
 				return "redirect:/employee";
-//			} else {
-//
-//				result.rejectValue("username", "error.username",
-//						"Try Again!! User Already exist!");
-//			}
+			} else {
+
+				result.rejectValue("username", "error.username",
+						"Try Again!! User Already exist!");
+			}
 
 		} else {
 
