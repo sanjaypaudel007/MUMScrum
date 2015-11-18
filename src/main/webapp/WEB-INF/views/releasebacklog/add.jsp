@@ -12,15 +12,6 @@
 <div class="row">
 	<div class="col-lg-12">
 	<form:form modelAttribute="releaseBacklog" method="post" class="form">
-	<!-- 
-	<c:set var="validationErrors"><form:errors path="*"/></c:set>
-	<c:if test="${not empty validationErrors}">
-	<c:forEach items="${validationErrors}" var="item" >
-		<p>${item}</p>
-	</c:forEach>
-	</c:if> 	 -->
-
-		<%-- <form:hidden path="productBacklog.id"/> --%>
 		<div class="row">
            <div class="col-lg-6">
            		<spring:bind path="name">
@@ -68,7 +59,7 @@
         </div>
 		<input class="btn btn-primary" type="submit" value="${buttonName}"/>
 		<%-- <c:set var="cancel_url" value="/productbacklog/detail/${releaseBacklog.productBacklog.id }"></c:set> --%>
-		<c:if test="${buttonName == 'Update'}">
+		<c:if test="${buttonName == 'Update' }">
 			<c:set var="cancel_url" value="/releasebacklog/detail/${releaseBacklog.id }"></c:set>
 		</c:if>
 		
