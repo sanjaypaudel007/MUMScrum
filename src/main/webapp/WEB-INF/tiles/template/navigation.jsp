@@ -43,7 +43,7 @@
 									class="fa fa-clock-o fa-fw"></i> Estimations</a></li>
 						</security:authorize>
 
-						<security:authorize access="hasRole('SCRUM_MASTER')">
+						<security:authorize access="hasAnyRole('SCRUM_MASTER', 'DEVELOPER', 'TESTER')">
 							<li><a href="<spring:url value="/sprint/" />"><i
 									class="fa fa-bar-chart-o fa-fw"></i> Burndown Chart</a></li>
 						</security:authorize>
