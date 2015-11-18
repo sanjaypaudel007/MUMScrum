@@ -83,6 +83,7 @@ public class EmployeeController {
 
 	}
 
+	//creates new employee
 	@RequestMapping(value = { "/register" }, method = RequestMethod.POST)
 	public String processRegistration(
 			@Valid @ModelAttribute("employee") Employee employee,
@@ -136,6 +137,7 @@ public class EmployeeController {
 		return "employee/detail";
 	}
 
+	//details
 	@RequestMapping(value = { "/detail" }, method = RequestMethod.GET)
 	public String displayDetailByName(ModelMap model) {
 		Employee employee;
@@ -152,6 +154,7 @@ public class EmployeeController {
 		return "employee/detail";
 	}
 
+	//delete
 	@RequestMapping(value = "/delete/{employeeId}", method = RequestMethod.GET)
 	public String deleteEmployee(@PathVariable int employeeId) {
 		employeeService.deleteEmployee(employeeId);
@@ -182,6 +185,7 @@ public class EmployeeController {
 		return "employee/editProfile";
 	}
 
+	//edit Profile	
 	@RequestMapping(value = "/editProfile", method = RequestMethod.POST)
 	public String editEmployee(
 			@Valid @ModelAttribute("employee") Employee employee,
@@ -215,6 +219,7 @@ public class EmployeeController {
 
 	}
 
+	//edit Employee
 	@RequestMapping(value = "/edit/{employeeId}", method = RequestMethod.POST)
 	public String editEmployee(@PathVariable int employeeId,
 			@Valid @ModelAttribute("employee") Employee employee,
@@ -251,6 +256,7 @@ public class EmployeeController {
 		return "employee/changepassword";
 	}
 
+	//change Password
 	@RequestMapping(value = "/changepassword", method = RequestMethod.POST)
 	public String changePassword(
 			@RequestParam("oldPassword") String oldPassword,
