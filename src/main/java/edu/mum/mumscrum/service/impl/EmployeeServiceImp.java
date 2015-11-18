@@ -19,7 +19,7 @@ public class EmployeeServiceImp implements EmployeeService {
 	@Autowired
 	EmployeeRepository employeeRepository;
 
-	@PreAuthorize(value = "hasRole('ADMIN')")
+//	@PreAuthorize(value = "hasRole('ADMIN')")
 	public void addEmployee(Employee employee) {
 		employeeRepository.save(employee);
 	}
