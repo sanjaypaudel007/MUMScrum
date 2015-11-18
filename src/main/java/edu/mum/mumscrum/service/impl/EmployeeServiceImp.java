@@ -75,4 +75,12 @@ public class EmployeeServiceImp implements EmployeeService {
 		//return null;
 		return employeeRepository.getEmployeesByRole("TESTER");
 	}
+
+	@Override
+	public void changePassword(String username, String password) {
+		Employee employee = employeeRepository.getEmployeeByUsername(username);
+		employee.setPassword(encryptPass(employee.getPassword()));
+		employeeRepository.save(employee);
+		
+	}
 }

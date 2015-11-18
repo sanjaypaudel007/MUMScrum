@@ -59,7 +59,7 @@
 			<div class="col-md-4 col-md-offset-4">
 				<div class="login-panel panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">Please Sign In</h3>
+						<h4 class="panel-title">MUM Scrum <small> - Please Sign In</small></h4>
 					</div>
 					<div class="panel-body">
 						<tiles:insertAttribute name="body" />

@@ -28,4 +28,6 @@ public interface EmployeeService {
 	public List<Employee> getAllDevelopers();
 
 	public List<Employee> getAllTesters();
+
+	public void changePassword(String username, String password);
 }

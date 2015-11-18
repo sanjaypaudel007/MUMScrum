@@ -1,7 +1,6 @@
 package edu.mum.mumscrum.enums;
 
 public enum RoleType {
-	NOT_ASSIGNED("NOT_ASSIGNED"),
 	SCRUM_MASTER("SCRUM_MASTER"),
 	DEVELOPER("DEVELOPER"),
 	TESTER("TESTER"),

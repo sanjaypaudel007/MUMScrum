@@ -9,12 +9,6 @@
 	<div class="col-lg-12">
 		<h4 class="page-header">Employee Update</h4>
 	</div>
-	<ol class="breadcrumb">
-		<li><i class="fa fa-users"></i><a
-			href="<spring:url value="/employee" />" type="submit"> Employee</a></li>
-
-		<li class="active">Edit</li>
-	</ol>
 </div>
 
 <div class="row">

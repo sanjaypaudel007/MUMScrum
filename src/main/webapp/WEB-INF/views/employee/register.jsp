@@ -8,11 +8,6 @@
 	<div class="col-lg-12">
 		<h4 class="page-header">Employee Registration</h4>
 	</div>
-	<ol class="breadcrumb">
-	<li><i class="fa fa-users"></i><a href="<spring:url value="/employee" />" type="submit"> Employee</a></li>
-		 
-		<li class="active"> Add</li>
-	</ol>
 </div>
 
 <div class="row">
